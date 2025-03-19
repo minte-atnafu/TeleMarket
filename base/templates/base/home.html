@@ -1,0 +1,201 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+<style>
+    body {
+        background-color: #5f7c82; /* Matching background color */
+        color: white;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        width: 90%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .header {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-weight: bold;
+        color: darkgreen;
+    }
+
+    /* Carousel Styles */
+    .carousel {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+
+    .carousel-inner {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        max-width: 900px; /* Adjust to fit 3 images */
+    }
+
+    .carousel-item {
+        flex-shrink: 0;
+        width: 33.33%; /* 3 images per row */
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel img {
+        width: 100%;
+        height: auto;
+        object-fit: cover; /* Ensures the images fill the container */
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .carousel-control-prev {
+        left: 0;
+    }
+
+    .carousel-control-next {
+        right: 0;
+    }
+
+    /* About Section Styles */
+    .about-section {
+        margin-top: 40px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .testimonial-card {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px;
+        display: inline-block;
+        width: 30%; /* Adjust to fit 3 items in a row */
+        box-sizing: border-box;
+    }
+
+    .testimonial-card img {
+        width: 100%; /* Ensures the image fills the card */
+        height: auto;
+        border-radius: 10px;
+    }
+
+    /* Adjust product images size */
+    .product-images img {
+        width: 80px;
+        margin: 5px;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>TELEMARKET ETHIOPIA</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id lectus gravida, dictum arcu sed, 
+                porttitor sem. Fusce felis nisl, commodo nec mollis ut, pharetra malesuada turpis. Class Lorem ipsum dolor sit amet, 
+                consectetur adipiscing elit. Pellentesque id lectus gravida, dictum arcu sed, porttitor sem. 
+                Fusce felis nisl, commodo nec mollis ut, pharetra malesuada turpis. Class</p>
+        </div>
+
+        <!-- Carousel Section -->
+        
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'assets/laptops.jpg' %}" alt="Laptops">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'assets/shoes.jpg' %}" alt="Shoes">
+                </div>
+
+                <div class="carousel-item active">
+                    <img src="{% static 'assets/laptops.jpg' %}" alt="Laptops">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'assets/phones.jpg' %}" alt="Phones">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'assets/shoes.jpg' %}" alt="Shoes">
+                </div>
+            
+                
+            </div>
+            <button class="carousel-control-prev" onclick="prevSlide()">&#10094;</button>
+            <button class="carousel-control-next" onclick="nextSlide()">&#10095;</button>
+        </div>
+
+        <!-- About Us Section -->
+        <div class="about-section">
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Pellentesque id lectus gravida, dictum arcu sed, porttitor sem. 
+                Fusce felis nisl, commodo nec mollis ut, pharetra malesuada turpis. Class Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Pellentesque id lectus gravida, dictum arcu sed, porttitor sem. Fusce felis nisl, commodo nec mollis ut, pharetra malesuada turpis. Class</p>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="testimonials">
+            <h2>Testimonials</h2>
+            <div class="testimonial-card">
+                <img src="{% static 'assets/tele.png' %}" class="img-fluid">
+                <p>Lorem ipsum dolor</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="{% static 'assets/tele.png' %}" class="img-fluid">
+                <p>Lorem ipsum dolor</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="{% static 'assets/tele.png' %}" class="img-fluid">
+                <p>Lorem ipsum dolor</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+
+        function showSlide(index) {
+            if (index >= slides.length) currentSlide = 0;
+            if (index < 0) currentSlide = slides.length - 1;
+            slides.forEach((slide, i) => {
+                slide.style.transform = `translateX(-${currentSlide * 100}%)`;
+            });
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+    </script>
+</body>
+
+{% endblock %}
