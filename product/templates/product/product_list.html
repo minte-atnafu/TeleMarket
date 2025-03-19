@@ -1,0 +1,94 @@
+{% extends 'main.html' %}
+{% block content %}
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #698A92;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            background: #B1B18A;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 250px;
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.2s;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Separate background color for name and description */
+        .product-info {
+            background-color: #F5F5F5;  /* Light background for name/description */
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .product h2 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product strong {
+            font-size: 16px;
+            color: #000;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .product a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Product List</h1>
+    <div class="product-container">
+        {% for product in products %}
+            <a href="{% url 'product_detail' product.id %}">
+                <div class="product">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+                    <div class="product-info">
+                        <h2>{{ product.name }}</h2>
+                        <strong>${{ product.price }}</strong>
+                    </div>
+                </div>
+            </a>
+        {% empty %}
+            <p>No products available.</p>
+        {% endfor %}
+    </div>
+ 
+{% endblock%}

@@ -1,0 +1,168 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    /* General Styles */
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Recovery Container */
+.recovery-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Heading */
+.recovery-container h1 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Message */
+.recovery-container .message {
+    margin-bottom: 1.5rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.recovery-container .message strong {
+    color: #333;
+}
+
+/* Code Input Boxes */
+.code-input {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.code-input .code-box {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+.code-input .code-box:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+/* Continue Button */
+.continue-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #8078C2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.continue-button:hover {
+    background-color: #8078C2;
+}
+
+/* Resend Email Link */
+.resend-email {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.resend-email a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.resend-email a:hover {
+    text-decoration: underline;
+}
+
+/* Back to Login Link */
+.back-to-login {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.back-to-login a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.back-to-login a:hover {
+    text-decoration: underline;
+}
+</style>
+<body>
+    <div class="recovery-container">
+        <!-- Heading -->
+        <h1>Password recovery</h1>
+        
+        <!-- Message -->
+        <p class="message">We sent a code to <strong>mintesinotatnafu81@gmail.com</strong>.</p>
+        
+        <!-- Code Input Boxes -->
+        <div class="code-input">
+            <input type="text" maxlength="1" class="code-box" required>
+            <input type="text" maxlength="1" class="code-box" required>
+            <input type="text" maxlength="1" class="code-box" required>
+            <input type="text" maxlength="1" class="code-box" required>
+            <input type="text" maxlength="1" class="code-box" required>
+            <input type="text" maxlength="1" class="code-box" required>
+        </div>
+        
+        <!-- Continue Button -->
+        <button type="submit" class="continue-button">Continue</button>
+        
+        <!-- Resend Email Link -->
+        <div class="resend-email">
+            <p>Don't receive email? <a href="#">Click to resend</a></p>
+        </div>
+        
+        <!-- Back to Login Link -->
+        <div class="back-to-login">
+            <a href="{% url 'login' %}">Back to login</a>
+        </div>
+    </div>
+    
+</body>
+<script>
+    const codeBoxes = document.querySelectorAll('.code-box');
+
+    codeBoxes.forEach((box, index) => {
+        box.addEventListener('input', (e) => {
+            if (e.target.value.length === 1 && index < codeBoxes.length - 1) {
+                codeBoxes[index + 1].focus(); // Move to the next box
+            }
+        });
+
+        box.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && index > 0 && !e.target.value) {
+                codeBoxes[index - 1].focus(); // Move to the previous box on backspace
+            }
+        });
+    });
+</script>
+
+{% endblock %}

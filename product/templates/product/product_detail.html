@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+{% block content%}
+ <title>{{ product.name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #698A92;
+            text-align: center;
+        }
+
+        .product-card {
+            background: #B1B18A;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        strong {
+            font-size: 18px;
+            color: #000;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="product-card">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% endif %}
+        <h1>{{ product.name }}</h1>
+        <strong>${{ product.price }}</strong>
+        <p>{{ product.description }}</p>
+        <a href="{% url 'product_list' %}" class="back-btn">Back to Products</a>
+    </div>
+
+{% endblock%}
