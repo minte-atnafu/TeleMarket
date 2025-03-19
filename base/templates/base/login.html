@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load static %}
+{% load socialaccount %}  <!-- Load the socialaccount template tags -->
 <style>
  body {
     font-family: Arial, sans-serif;
@@ -185,14 +186,14 @@ h1 {
 
                 <div class="separator">--- OR ---</div>
                 <div class="social-login">
-                    <button class="social-button google">
+                    <a href="{% provider_login_url 'google' %}" class="social-button google">
                         <img src="https://www.gstatic.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" alt="Google Logo">
                         Login with Google
-                    </button>
-                    <button class="social-button facebook">
+                    </a>
+                    <a href="#" class="social-button facebook">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
                         Login with Facebook
-                    </button>
+                    </a>
                 </div>
                 <div class="additional-links">
                     <a href="{% url 'signup' %}">Create Account</a>

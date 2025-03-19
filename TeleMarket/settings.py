@@ -34,6 +34,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Application definition
 
+SITE_ID=1
+
 INSTALLED_APPS = [
     'product',
     'base',
@@ -45,11 +47,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # social accounts
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',  # Add the provider(s) you need
 ]
+
+SOCIALACCOUNT_PROVIDERS ={
+    "google":{
+        "scope":[
+            "profile",
+            "email"
+        ],
+        "AUTH_PARAMS": {"access_type": "online"}
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -145,3 +158,16 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# these backed set for authentication for social accounts
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
+
+LOGIN_DIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_AUTHENTICATED_REDIRECT_URL = '/'
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
