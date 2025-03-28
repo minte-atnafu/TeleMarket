@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.conf import settings
 
 # Create your views here.
 
@@ -30,6 +31,25 @@ def signup(request):
 
             # Log the user in immediately after creation
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+
+            # Send Welcome Email
+            subject = "Welcome to Our Platform!"
+            context = {'user': user}  # Pass user object to template
+            
+            # Corrected path to email template
+            html_message = render_to_string('base/welcome_email.html', context)
+            plain_message = strip_tags(html_message)  # Convert HTML to plain text
+            
+            
+            result = send_mail(
+                subject,
+                plain_message,  # Plain text version
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                html_message=html_message,  # HTML version
+                fail_silently=False,
+            )
+            print(f"Send mail result: {result}")
 
             # Redirect to home page or another page after successful signup
             return redirect('home')
