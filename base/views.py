@@ -7,6 +7,11 @@ from django.contrib.auth.models import User
 from .forms import CustomSignupForm
 from django.contrib import messages
 from django.contrib.auth import authenticate
+
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 # Create your views here.
 
 def home(request):
@@ -24,7 +29,7 @@ def signup(request):
             user = User.objects.create_user(username=username, email=email, password=password)
 
             # Log the user in immediately after creation
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
             # Redirect to home page or another page after successful signup
             return redirect('home')
@@ -35,7 +40,6 @@ def signup(request):
         form = CustomSignupForm()
 
     return render(request, 'base/signup.html', {'form': form})
-
 
 def user_login(request):
     if request.method == 'POST':

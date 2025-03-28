@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .email-container h2 {
+            color: #333;
+        }
+        .email-container p {
+            color: #555;
+            line-height: 1.5;
+        }
+        .email-signature {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h2>Welcome, {{ user.username }}!</h2>
+        <p>Thank you for signing up. We're excited to have you on board!</p>
+        <p>Feel free to explore our platform and reach out if you have any questions.</p>
+        <p class="email-signature">Best regards,<br><strong>Your Django App Team</strong></p>
+    </div>
+</body>
+</html>
+
+{% endblock %}
