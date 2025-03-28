@@ -168,7 +168,7 @@ h2 {
                 <!-- Regular Signup Form -->
                 <form method="post" action="{% url 'signup' %}">
                     {% csrf_token %}
-                    
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                     <!-- Display errors -->
                     {% if form.errors %}
                         <div class="form-errors">
