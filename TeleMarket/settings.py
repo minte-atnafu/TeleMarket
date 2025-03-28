@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',  # Add the provider(s) you need
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',  # Add the provider(s) you need
 ]
 
 SOCIALACCOUNT_PROVIDERS ={
@@ -171,3 +172,12 @@ LOGOUT_REDIRECT_URL = "/"
 ACCOUNT_AUTHENTICATED_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_LOGIN_ON_GET=True
+
+# email configuration
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"  # Change if using a different provider
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")  # Use environment variables instead
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
