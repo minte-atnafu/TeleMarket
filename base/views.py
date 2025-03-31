@@ -12,6 +12,16 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.auth.tokens import default_token_generator
+from django.http import HttpResponse
+
+from django.core.cache import cache  # Add this import
+import random
+import time
+from django.contrib.auth import get_user_model
+from django.contrib.auth import login as auth_login  # Renamed to avoid conflict
 
 # Create your views here.
 
@@ -97,11 +107,144 @@ def user_login(request):
         return render(request, 'base/login.html')
 
 
+
+
+
+User = get_user_model()
+CODE_EXPIRY = 300  # 5 minutes in seconds
+
 def forgot_password_view(request):
+    if request.method == 'POST':
+        try:
+            email = request.POST.get('email', '').lower().strip()
+            
+            if not email:
+                messages.error(request, "Email is required.")
+                return render(request, 'base/forgot_password.html')
+            
+            # Always return success message (security best practice)
+            user_exists = User.objects.filter(email=email).exists()
+            if not user_exists:
+                print(f"Debug: Email {email} not found in database")  # Debug
+                messages.success(request, "If this email exists, you'll receive a recovery code.")
+                return redirect('forgot_password')
+            
+            # Generate and store code
+            recovery_code = str(random.randint(100000, 999999))
+            cache_key = f"pw_reset_{email}"
+            
+            # Store in cache
+            cache.set(cache_key, {
+                'code': recovery_code,
+                'timestamp': time.time(),
+                'attempts': 0
+            }, CODE_EXPIRY)
+            print(f"Debug: Code {recovery_code} cached for {email}")  # Debug
+            
+            # Store email in session
+            request.session['reset_email'] = email
+            request.session.modified = True
+            print(f"Debug: Session set for {email}")  # Debug
+            
+            # Send email (with error handling)
+            try:
+                send_mail(
+                    'Your Password Recovery Code',
+                    f'Your verification code is: {recovery_code}',
+                    settings.DEFAULT_FROM_EMAIL,
+                    [email],
+                    fail_silently=False,
+                )
+                print(f"Debug: Email sent to {email}")  # Debug
+            except Exception as e:
+                print(f"Error sending email: {e}")
+                messages.error(request, "Failed to send email. Please try again.")
+                return redirect('forgot_password')
+            
+            messages.success(request, "Recovery code sent! Check your email.")
+            return redirect('recovery')  # This should be your recovery page
+            
+        except Exception as e:
+            print(f"System error: {e}")
+            messages.error(request, "A system error occurred. Please try again.")
+            return redirect('forgot_password')
+    
+    # GET request - clear any existing session
+    if 'reset_email' in request.session:
+        del request.session['reset_email']
     return render(request, 'base/forgot_password.html')
 
 def recovery_view(request):
-    return render(request, 'base/recovery.html')
-
+    if 'reset_email' not in request.session:
+        return redirect('forgot_password')
+    
+    email = request.session['reset_email']
+    
+    if request.method == 'POST':
+        # Combine all code inputs
+        code_entered = ''.join([
+            request.POST.get('code1', ''),
+            request.POST.get('code2', ''),
+            request.POST.get('code3', ''),
+            request.POST.get('code4', ''),
+            request.POST.get('code5', ''),
+            request.POST.get('code6', '')
+        ])
+        
+        cache_key = f"pw_reset_{email}"
+        stored_data = cache.get(cache_key)
+        
+        if stored_data and stored_data['code'] == code_entered:
+            request.session['code_verified'] = True
+            return redirect('set_password')
+        else:
+            messages.error(request, "Invalid or expired recovery code.")
+    
+    return render(request, 'base/recovery.html', {
+        'email': request.session.get('reset_email', '')
+    })
 def set_password_view(request):
+    # Verify proper flow
+    if 'reset_email' not in request.session or not request.session.get('code_verified'):
+        messages.error(request, "Please complete verification first.")
+        return redirect('forgot_password')
+    
+    email = request.session['reset_email']
+    
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+        
+        # Basic password validation
+        if new_password != confirm_password:
+            messages.error(request, "Passwords don't match.")
+        elif len(new_password) < 8:
+            messages.error(request, "Password must be at least 8 characters.")
+        else:
+            try:
+                user = User.objects.get(email=email)
+                user.set_password(new_password)
+                user.save()
+                
+                # Automatically log the user in
+                auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')  # This logs them in
+                
+                # Clean up session and cache
+                cache.delete(f"pw_reset_{email}")
+                del request.session['reset_email']
+                del request.session['code_verified']
+                
+                messages.success(request, "Password reset successfully!")
+                return redirect('home')  # Now redirects to home page
+            except User.DoesNotExist:
+                messages.error(request, "User not found.")
+    
     return render(request, 'base/set_password.html')
+# def forgot_password_view(request):
+#     return render(request, 'base/forgot_password.html')
+
+# def recovery_view(request):
+#     return render(request, 'base/recovery.html')
+
+# def set_password_view(request):
+#     return render(request, 'base/set_password.html')

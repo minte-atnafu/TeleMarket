@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeleMarket</title>
+    <!-- 16x16 for basic browsers -->
+<link rel="icon" href="{% static 'assets/tele.png' %}" sizes="16x16" type="image/x-icon">
+
+<!-- 32x32 for higher resolution displays -->
+<link rel="icon" href="{% static 'assets/tele.png' %}" sizes="32x32" type="image/x-icon">
+
+<!-- 192x192 for Android home screen -->
+<link rel="icon" href="{% static 'assets/tele.png' %}" sizes="192x192" type="image/x-icon">
+
 </head>
 <body>
     {% include 'navbar.html' %}

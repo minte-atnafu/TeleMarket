@@ -120,20 +120,25 @@ body {
         <h1>Password recovery</h1>
         
         <!-- Message -->
-        <p class="message">We sent a code to <strong>mintesinotatnafu81@gmail.com</strong>.</p>
+        <p class="message">We sent a code to <strong>{{ email }}</strong>.</p>
         
         <!-- Code Input Boxes -->
-        <div class="code-input">
-            <input type="text" maxlength="1" class="code-box" required>
-            <input type="text" maxlength="1" class="code-box" required>
-            <input type="text" maxlength="1" class="code-box" required>
-            <input type="text" maxlength="1" class="code-box" required>
-            <input type="text" maxlength="1" class="code-box" required>
-            <input type="text" maxlength="1" class="code-box" required>
-        </div>
+        <form method="post" action="{% url 'recovery' %}">
+            {% csrf_token %}
+            <div class="code-input">
+                <input type="text" maxlength="1" class="code-box" name="code1" required>
+                <input type="text" maxlength="1" class="code-box" name="code2" required>
+                <input type="text" maxlength="1" class="code-box" name="code3" required>
+                <input type="text" maxlength="1" class="code-box" name="code4" required>
+                <input type="text" maxlength="1" class="code-box" name="code5" required>
+                <input type="text" maxlength="1" class="code-box" name="code6" required>
+            </div>
+            <button type="submit" class="continue-button">Continue</button>
+        </form>
         
-        <!-- Continue Button -->
-        <button type="submit" class="continue-button">Continue</button>
+        
+        <!-- Continue Button
+        <button type="submit" class="continue-button">Continue</button> -->
         
         <!-- Resend Email Link -->
         <div class="resend-email">
