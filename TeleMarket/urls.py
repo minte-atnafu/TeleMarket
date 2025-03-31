@@ -23,6 +23,7 @@ urlpatterns = [
     path('product/', include('product.urls')),
     path('', include('base.urls')),
     path("accounts/", include("allauth.urls")),
+    # path('accounts/', include('django.contrib.auth.urls')),  # Make sure this is included
 ]
 
 
