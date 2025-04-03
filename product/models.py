@@ -1,13 +1,13 @@
 from django.db import models
 
-# Create your models here.
 class Product(models.Model):
-    name=models.CharField(max_length=255)
-    price=models.DecimalField(max_digits=10, decimal_places=2)
-    description=models.TextField(blank=True)
-    image=models.ImageField(upload_to='product/', blank=True, null=True)
-    created_at=models.DateTimeField(auto_now_add=True)
-    rating = models.PositiveIntegerField(default=0)
+    id = models.CharField(max_length=255, primary_key=True)  # Match DB column type
+    product_name = models.CharField(max_length=255)  # Match DB column
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    username = models.CharField(max_length=255, null=True, blank=True)
+    location = models.CharField(max_length=255, null=True, blank=True)
+    media_path = models.TextField(null=True, blank=True)  # Match DB column
 
-    def __str__(self):
-        return self.name
+    class Meta:
+        db_table = 'TeleMarket'  # Make sure it matches the existing table name
+        app_label = 'product'  # Needed for the database router
