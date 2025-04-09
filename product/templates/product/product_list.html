@@ -1,6 +1,9 @@
 {% extends 'main.html' %}
 
 {% block content %}
+{% load static %}
+{% get_media_prefix as MEDIA_URL %}
+
     <title>Product List</title>
     <style>
         body {
@@ -71,23 +74,25 @@
         }
 
     </style>
-    <h1>Product List</h1>
-    <div class="product-container">
-        {% for product in products %}
-            <a href="{% url 'product_detail' product.id %}">
-                <div class="product">
-                    {% if product.media_path %}
-                        <img src="{{ product.media_path }}" alt="{{ product.product_name }}">
-                    {% endif %}
-                    <div class="product-info">
-                        <h2>{{ product.product_name }}</h2>
-                        <strong>${{ product.price|floatformat:2 }}</strong>
-
-                    </div>
-                </div>
-            </a>
-        {% empty %}
-            <p>No products available.</p>
-        {% endfor %}
-    </div>
+   <h1>Product List</h1>
+   <div class="product-container">
+       {% for product in products %}
+           <a href="{% url 'product_detail' product.id %}">
+               <div class="product">
+                   {% if product.media_path %}
+                       <img src="{{ MEDIA_URL }}{{ product.media_path }}" alt="{{ product.product_name }}">
+                   {% else %}
+                       <img src="{% static 'default.jpg' %}" alt="No Image">
+                   {% endif %}
+                   <div class="product-info">
+                       <h2>{{ product.product_name }}</h2>
+                       <strong>${{ product.price|floatformat:2 }}</strong>
+                   </div>
+               </div>
+           </a>
+       {% empty %}
+           <p>No products available.</p>
+       {% endfor %}
+   </div>
+   
 {% endblock %}
