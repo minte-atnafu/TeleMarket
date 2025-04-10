@@ -27,11 +27,21 @@ def product_detail(request, product_id):
     # Debugging: Print the media path and full path
     if product.media_path:
         relative_path = product.media_path
-        full_path = os.path.join(settings.MEDIA_ROOT, product.media_path)
+        full_path = os.path.join(settings.MEDIA_ROOT, relative_path) if relative_path else None
+
         print(f"Media Path: {product.media_path}")
         print(f"Full Path: {full_path}")
-        if not os.path.exists(full_path):
-            product.media_path = "photos/default.jpg"
+       
+        if not relative_path or not os.path.exists(full_path):
+            # If media_path is missing or the file doesn't exist, set a default image
+            relative_path = "photos/default.jpg"
 
-    context = {'product': product}
+        product.media_path = relative_path
+
+    # ✅ Add MEDIA_URL to the context
+    context = {
+        'product': product,
+        'MEDIA_URL': settings.MEDIA_URL,
+    }
+
     return render(request, 'product/product_detail.html', context)

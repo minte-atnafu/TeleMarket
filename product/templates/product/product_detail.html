@@ -55,7 +55,9 @@
 
 <div class="product-card">
     {% if product.media_path %}
-    <img src="{{ MEDIA_URL }}{{ product.media_path }}" alt="{{ product.product_name }}">
+    <img src="/media/{{ product.media_path }}" alt="{{ product.product_name }}">
+
+
     {% else %}
         <img src="{% static 'default.jpg' %}" alt="No Image">
     {% endif %}
@@ -65,5 +67,6 @@
     <p>Location: {{ product.location }}</p>
     <p>{{ product.description }}</p>
     <a href="{% url 'product_list' %}" class="back-btn">Back to Products</a>
+
 </div>
 {% endblock %}
