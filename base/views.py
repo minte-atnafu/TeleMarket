@@ -22,11 +22,13 @@ import random
 import time
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login  # Renamed to avoid conflict
+from .models import Testimonial  # import your model
 
 # Create your views here.
 
 def home(request):
-    return render(request, 'base/home.html')
+    testimonials = Testimonial.objects.all()  # fetch all testimonials
+    return render(request, 'base/home.html', {'testimonials': testimonials})
 
 def signup(request):
     if request.method == 'POST':
