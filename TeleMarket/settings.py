@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-n)#%v@ka9gxt+vza-4qaomv-m(z6&e6@0oxqx%-1ezh&)-%yxi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
