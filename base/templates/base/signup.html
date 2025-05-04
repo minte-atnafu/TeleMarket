@@ -2,208 +2,217 @@
 
 {% block content %}
 {% load static %}
-{% load socialaccount %}  <!-- Load the socialaccount template tags -->
+{% load socialaccount %}
 
 <style>
-/* Your existing CSS styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-}
+    .auth-container {
+        width: 100%;
+        max-width: 900px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        margin: 0 auto;
+    }
 
-.container {
-    display: flex;
-    width: 900px; /* Adjust width as needed */
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
+    .auth-left {
+        flex: 1;
+    }
 
-.left-side {
-    flex: 1;
-}
+    .auth-left img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-.left-side img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    .auth-right {
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-.right-side {
-    flex: 1;
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .auth-form-container {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
 
-.signup-container {
-    width: 100%;
-    max-width: 350px;
-    text-align: center;
-}
+    h2.auth-title {
+        margin-bottom: 1.5rem;
+        text-align: center;
+        color: #333;
+    }
 
-h2 {
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    color: #333;
-}
+    .social-buttons {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
 
-.social-buttons {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-}
+    .social-button {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        cursor: pointer;
+        background-color: #fff;
+        color: #333;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+    }
 
-.social-button {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    cursor: pointer;
-    background-color: #fff;
-    color: #333;
-    transition: background-color 0.3s ease;
-}
+    .social-button img {
+        width: 16px;
+        height: 16px;
+        margin-right: 0.5rem;
+    }
 
-.social-button img {
-    width: 16px;
-    height: 16px;
-    margin-right: 0.5rem;
-}
+    .social-button:hover {
+        background-color: #f1f1f1;
+    }
 
-.social-button.google:hover {
-    background-color: #f1f1f1;
-}
+    .separator {
+        margin: 1.5rem 0;
+        color: #666;
+        text-align: center;
+        position: relative;
+    }
 
-.social-button.facebook:hover {
-    background-color: #f1f1f1;
-}
+    .separator::before,
+    .separator::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #ddd;
+        margin: auto;
+    }
 
-.separator {
-    margin: 1.5rem 0;
-    color: #666;
-    font-size: 0.9rem;
-}
+    .separator span {
+        padding: 0 10px;
+    }
 
-.form-group {
-    margin-bottom: 1rem;
-    text-align: left;
-}
+    .form-group {
+        margin-bottom: 1rem;
+    }
 
-.form-group input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
+    .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
 
-.create-account-button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #8078C2;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    .auth-button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #8078C2;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-.create-account-button:hover {
-    background-color: #6b63aa;
-}
+    .auth-button:hover {
+        background-color: #6b63aa;
+    }
 
-.login-link {
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-    color: #666;
-}
+    .auth-footer {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #666;
+    }
 
-.login-link a {
-    color: #007bff;
-    text-decoration: none;
-}
+    .auth-footer a {
+        color: #007bff;
+        text-decoration: none;
+    }
 
-.login-link a:hover {
-    text-decoration: underline;
-}
+    .auth-footer a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .auth-container {
+            flex-direction: column;
+        }
+        
+        .auth-left {
+            display: none;
+        }
+        
+        .auth-right {
+            padding: 1.5rem;
+        }
+    }
 </style>
 
-<body>
-    <div class="container">
-        <div class="left-side">
-            <img src="{% static 'assets/tele.png' %}" alt="Signup Image">
-        </div>
-    
-        <div class="right-side">
-            <div class="signup-container">
-                <h2>Create account</h2>
-                <!-- Social Signup Buttons -->
-                <div class="social-buttons">
-                    <a href="{% provider_login_url 'google' %}" class="social-button google">
-                        <img src="https://www.gstatic.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" alt="Google Logo">
-                        Sign up with Google
-                    </a>
-                    <a href="#" class="social-button facebook">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
-                        Sign up with Facebook
-                    </a>
+<div class="auth-container">
+    <div class="auth-left">
+        <img src="{% static 'assets/tele.png' %}" alt="Signup Image">
+    </div>
+
+    <div class="auth-right">
+        <div class="auth-form-container">
+            <h2 class="auth-title">Create account</h2>
+            
+            <div class="social-buttons">
+                <a href="{% provider_login_url 'google' %}" class="social-button google">
+                    <img src="https://www.gstatic.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" alt="Google">
+                    Sign up with Google
+                </a>
+                <a href="#" class="social-button facebook">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                    Sign up with Facebook
+                </a>
+            </div>
+
+            <div class="separator">
+                <span>OR</span>
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                
+                {% if form.errors %}
+                    <div class="form-errors">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p class="error-message">{{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <input type="text" name="username" placeholder="Username" required>
                 </div>
-                <div class="separator">- OR -</div>
-    
-                <!-- Regular Signup Form -->
-                <form method="post" action="{% url 'signup' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-                    <!-- Display errors -->
-                    {% if form.errors %}
-                        <div class="form-errors">
-                            <ul>
-                                {% for field in form %}
-                                    {% if field.errors %}
-                                        <li>{{ field.label }}: {{ field.errors }}</li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
-                    
-                    <div class="form-group">
-                        <input type="text" id="username" name="username" placeholder="Username" value="{{ form.username.value }}" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Email Address" value="{{ form.email.value }}" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="password1" name="password1" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="password2" name="password2" placeholder="Confirm Password" required>
-                    </div>
-    
-                    <button type="submit" class="create-account-button">Create Account</button>
-                </form>
-    
-                <div class="login-link">
-                    Already have an account? <a href="{% url 'login' %}">Log in</a>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email Address" required>
                 </div>
+                <div class="form-group">
+                    <input type="password" name="password1" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password2" placeholder="Confirm Password" required>
+                </div>
+
+                <button type="submit" class="auth-button">Create Account</button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="{% url 'login' %}">Log in</a>
             </div>
         </div>
     </div>
-</body>
-
+</div>
 {% endblock %}

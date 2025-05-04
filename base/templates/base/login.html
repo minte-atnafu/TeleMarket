@@ -2,206 +2,229 @@
 
 {% block content %}
 {% load static %}
-{% load socialaccount %}  <!-- Load the socialaccount template tags -->
+{% load socialaccount %}
+
 <style>
- body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-}
+    /* Main container styles */
+    .login-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 70px); /* Subtract navbar height */
+        padding: 2rem;
+        background-color: #f4f4f4;
+    }
 
-.container {
-    display: flex;
-    width: 900px; /* Adjust width as needed */
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
+    .login-container {
+        display: flex;
+        width: 100%;
+        max-width: 900px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
 
-.left-side {
-    flex: 1;
-}
+    .login-left {
+        flex: 1;
+    }
 
-.left-side img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    .login-left img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-.right-side {
-    flex: 1;
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .login-right {
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.login-container {
-    width: 100%;
-    max-width: 350px;
-    text-align: center;
-}
+    .login-form-container {
+        width: 100%;
+        max-width: 350px;
+    }
 
-h1 {
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    color: #333;
-}
+    /* Form element styles */
+    .login-title {
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        color: #333;
+        text-align: center;
+    }
 
-.form-group {
-    margin-bottom: 1rem;
-    text-align: left;
-}
+    .form-group {
+        margin-bottom: 1rem;
+    }
 
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #333;
-}
+    .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
 
-.form-group input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
+    .login-button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #8078C2;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
-.login-button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #8078C2;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    .login-button:hover {
+        background-color: #6b63aa;
+    }
 
-.login-button:hover {
-    background-color: #6b63aa;
-}
+    .separator {
+        margin: 1.5rem 0;
+        color: #666;
+        text-align: center;
+        position: relative;
+    }
 
-.separator {
-    margin: 1.5rem 0;
-    color: #666;
-    font-size: 0.9rem;
-}
+    .separator::before,
+    .separator::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #ddd;
+        margin: auto;
+    }
 
-.social-login {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
+    .separator span {
+        padding: 0 10px;
+    }
 
-.social-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    background-color: #fff;
-    color: #333;
-    transition: background-color 0.3s ease;
-}
+    .social-login {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
 
-.social-button img {
-    width: 16px;
-    height: 16px;
-    margin-right: 0.5rem;
-}
+    .social-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        background-color: #fff;
+        color: #333;
+        transition: background-color 0.3s;
+        text-decoration: none;
+    }
 
-.social-button.google:hover {
-    background-color: #f1f1f1;
-}
+    .social-button img {
+        width: 16px;
+        height: 16px;
+        margin-right: 0.5rem;
+    }
 
-.social-button.facebook:hover {
-    background-color: #f1f1f1;
-}
+    .social-button:hover {
+        background-color: #f1f1f1;
+    }
 
-.additional-links {
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-    color: #666;
-}
+    .login-links {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #666;
+    }
 
-.additional-links a {
-    color: #007bff;
-    text-decoration: none;
-    margin: 0 0.5rem;
-}
+    .login-links a {
+        color: #007bff;
+        text-decoration: none;
+        margin: 0 0.5rem;
+    }
 
-.additional-links a:hover {
-    text-decoration: underline;
-}
+    .login-links a:hover {
+        text-decoration: underline;
+    }
 
-.error-message {
-    color: red;
-    margin-bottom: 1rem;
-}
+    .error-message {
+        color: #dc3545;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .login-container {
+            flex-direction: column;
+        }
+        
+        .login-left {
+            display: none;
+        }
+        
+        .login-right {
+            padding: 1.5rem;
+        }
+    }
 </style>
 
-<body>
-    <div class="container">
-        <!-- Left Side: Picture -->
-        <div class="left-side">
+<div class="login-page">
+    <div class="login-container">
+        <div class="login-left">
             <img src="{% static 'assets/tele.png' %}" alt="Login Image">
         </div>
 
-        <!-- Right Side: Login Form -->
-        <div class="right-side">
-            <div class="login-container">
-                <h1>Login</h1>
-                <!-- Display custom error message -->
+        <div class="login-right">
+            <div class="login-form-container">
+                <h1 class="login-title">Login</h1>
+                
                 {% if messages %}
-                <div class="error-message">
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                </div>
-            {% endif %}
+                    <div class="error-message">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
                 <form method="post" action="{% url 'login' %}" autocomplete="off">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="off">
+                        <input type="email" name="email" placeholder="Email Address" required autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="off">
+                        <input type="password" name="password" placeholder="Password" required autocomplete="off">
                     </div>
                     <button type="submit" class="login-button">Login</button>
                 </form>
 
-                <div class="separator">--- OR ---</div>
+                <div class="separator">
+                    <span>OR</span>
+                </div>
+
                 <div class="social-login">
                     <a href="{% provider_login_url 'google' %}" class="social-button google">
-                        <img src="https://www.gstatic.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" alt="Google Logo">
+                        <img src="https://www.gstatic.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" alt="Google">
                         Login with Google
                     </a>
                     <a href="#" class="social-button facebook">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
                         Login with Facebook
                     </a>
                 </div>
-                <div class="additional-links">
+
+                <div class="login-links">
                     <a href="{% url 'signup' %}">Create Account</a>
                     <a href="{% url 'forgot_password' %}">Forgot Password?</a>
                 </div>
             </div>
         </div>
     </div>
-</body>
-
+</div>
 {% endblock %}

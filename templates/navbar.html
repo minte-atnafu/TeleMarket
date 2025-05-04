@@ -1,0 +1,232 @@
+{% load static %}
+<header class="header">
+    <div class="header-container">
+       <!-- Logo pushed to left edge -->
+       <div class="logo-container">
+        <div class="logo">
+            <img src="{% static 'assets/tele.png' %}" alt="TeleMarket Ethiopia" class="logo-img">
+            <div class="logo-text">
+                <span class="logo-main">TeleMarket</span>
+                <span class="logo-sub">Ethiopia</span>
+            </div>
+        </div>
+    </div>
+         <!-- Navigation pushed to right edge -->
+         <div class="nav-container">
+            <nav class="nav-links" id="navLinks">
+                <a href="{% url 'home' %}" {% if request.path == '/' %}class="active"{% endif %}>Home</a>
+                <a href="#about-section">About Us</a>
+                <a href="{% url 'signup' %}" {% if request.path == '/signup/' %}class="active"{% endif %}>Signup</a>
+                <a href="{% url 'login' %}" {% if request.path == '/login/' %}class="active"{% endif %}>Login</a>
+                <a href="#" class="coming-soon">Contact</a>
+            </nav>
+        </div>
+        
+        <div class="menu-toggle" id="menuToggle">
+            ☰
+        </div>
+    </div>
+</header>
+
+<style>
+    /* Base Styles */
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    .header {
+        background-color: #2c3e50;
+        color: white;
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header-container {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+    /* Logo Container - Left Edge */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        padding-right: 100px;
+    }
+       /* Logo Styles */
+       .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .logo-img {
+        height: 50px; /* Adjust based on your logo */
+        width: auto;
+    }
+    
+    .logo-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+    
+    .logo-main {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #f39c12;
+    }
+    
+    .logo-sub {
+        font-size: 1rem;
+        color: #ecf0f1;
+    }
+    /* Navigation Container - Right Edge */
+    .nav-container {
+        display: flex;
+        align-items: center;
+        padding-left: 40px;
+    }
+    
+  
+
+    
+    /* Navigation Styles */
+    .nav-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+    
+    .nav-links a {
+        color: #ecf0f1;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        padding: 0.5rem 0;
+        position: relative;
+    }
+    
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: #f39c12;
+    }
+
+    .coming-soon {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    
+    .coming-soon::after {
+        content: " (soon)";
+        font-size: 0.8em;
+    }
+    
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #f39c12;
+        transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+        width: 100%;
+    }
+    
+    /* Mobile Menu */
+    .menu-toggle {
+        display: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .nav-links {
+            flex-direction: column;
+            width: 100%;
+            gap: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .nav-links.active {
+            max-height: 300px;
+            padding: 1rem 0;
+        }
+        
+        .nav-links a {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .menu-toggle {
+            display: block;
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            color: white;
+        }
+    }
+</style>
+
+<script>
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+        }
+    });
+
+    // Add this script to handle About Us scrolling
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle About Us link click
+        const aboutLink = document.querySelector('a[href="#about-section"]');
+        if (aboutLink) {
+            aboutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Calculate position accounting for navbar height
+                    const navbarHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = target.offsetTop - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without reload
+                    history.pushState(null, null, '#about-section');
+                }
+            });
+        }
+    });
+</script>
