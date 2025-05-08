@@ -23,7 +23,8 @@ import time
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login  # Renamed to avoid conflict
 from .models import Testimonial  # import your model
-
+import smtplib
+from django.core.mail import EmailMessage
 # Create your views here.
 
 def home(request):
@@ -253,11 +254,38 @@ def set_password_view(request):
 
 def contact_view(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('contact_success')  # You'll need to create this view/URL
-    else:
-        form = ContactForm()
+        try:
+            first_name = request.POST.get('first_name', '').strip()
+            last_name = request.POST.get('last_name', '').strip()
+            user_email = request.POST.get('email', '').strip()
+            message_content = request.POST.get('message', '').strip()
+
+            subject = f"New message from {first_name} {last_name}"
+            body = f"""
+            From: {first_name} {last_name} <{user_email}>
+            
+            Message:
+            {message_content}
+            """
+
+            # Create email with custom headers
+            email = EmailMessage(
+                subject,
+                body,
+                settings.DEFAULT_FROM_EMAIL,  # The authenticated sender
+                [settings.CONTACT_EMAIL],
+                headers={
+                    'Reply-To': f"{first_name} {last_name} <{user_email}>",
+                    'X-Original-From': f"{first_name} {last_name} <{user_email}>",
+                }
+            )
+            email.send()
+
+            messages.success(request, 'Message sent successfully!')
+        except Exception as e:
+            messages.error(request, 'Failed to send message')
+            print(f"Email error: {str(e)}")
+        
+        return redirect('contact')
     
-    return render(request, 'base/contact.html', {'form': form})
+    return render(request, 'base/contact.html')

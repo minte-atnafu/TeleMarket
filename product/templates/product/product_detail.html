@@ -2,71 +2,193 @@
 {% block content %}
 <title>{{ product.name }}</title>
 <style>
+    :root {
+        --primary-color: #698A92;
+        --secondary-color: #B1B18A;
+        --accent-color: #FFD700;
+        --text-dark: #333;
+        --text-light: #666;
+        --white: #fff;
+    }
+
     body {
-        font-family: Arial, sans-serif;
-        background-color: #698A92;
-        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
     }
 
     .product-card {
-        background: #B1B18A;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 400px;
-        margin: 50px auto;
-        padding: 20px;
-        text-align: center;
+        background: var(--white);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        width: 380px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .product-card img {
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-image {
         width: 100%;
-        height: auto;
-        border-bottom: 1px solid #ddd;
+        height: 250px;
+        object-fit: cover;
+        border-bottom: 1px solid #eee;
     }
 
-    h1 {
-        color: #333;
+    .product-details {
+        padding: 25px;
     }
 
-    p {
-        font-size: 16px;
-        color: #666;
+    .product-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 10px;
     }
 
-    strong {
-        font-size: 18px;
-        color: #000;
+    .product-price {
+        font-size: 20px;
+        color: #e63946;
+        font-weight: 700;
+        margin-bottom: 15px;
     }
 
-    .back-btn {
-        display: inline-block;
+    .product-seller, .product-location {
+        font-size: 14px;
+        color: var(--text-light);
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .product-seller i, .product-location i {
+        margin-right: 8px;
+        color: var(--primary-color);
+    }
+
+    .product-description {
+        font-size: 15px;
+        color: var(--text-dark);
+        line-height: 1.5;
+        margin: 15px 0;
+    }
+
+    /* Star Rating */
+    .rating {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+    }
+
+    .stars {
+        color: var(--accent-color);
+        font-size: 20px;
+    }
+
+    .rating-count {
+        font-size: 14px;
+        color: var(--text-light);
+        margin-left: 8px;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
         margin-top: 20px;
-        padding: 10px 20px;
-        background: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
     }
 
-    .back-btn:hover {
-        background: #0056b3;
+    .btn {
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-back {
+        background: var(--primary-color);
+        color: var(--white);
+    }
+
+    .btn-back:hover {
+        background: #5a7980;
+    }
+
+    .btn-rate {
+        background: var(--accent-color);
+        color: var(--text-dark);
+    }
+
+    .btn-rate:hover {
+        background: #e6c200;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+        .product-card {
+            width: 90%;
+        }
     }
 </style>
 
 <div class="product-card">
     {% if product.media_path %}
-    <img src="/media/{{ product.media_path }}" alt="{{ product.product_name }}">
-
-
+        <img src="/media/{{ product.media_path }}" alt="{{ product.product_name }}" class="product-image">
     {% else %}
-        <img src="{% static 'default.jpg' %}" alt="No Image">
+        <img src="{% static 'default.jpg' %}" alt="No Image" class="product-image">
     {% endif %}
-    <h1>{{ product.product_name }}</h1>
-    <strong>Price: ${{ product.price }}</strong>
-    <p>Posted by: {{ product.username }}</p>
-    <p>Location: {{ product.location }}</p>
-    <p>{{ product.description }}</p>
-    <a href="{% url 'product_list' %}" class="back-btn">Back to Products</a>
 
+    <div class="product-details">
+        <h1 class="product-title">{{ product.product_name }}</h1>
+        <div class="product-price">${{ product.price }}</div>
+
+        <div class="product-seller">
+            <i class="fas fa-user"></i>
+            <span>Posted by: {{ product.username }}</span>
+        </div>
+
+        <div class="product-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Location: {{ product.location }}</span>
+        </div>
+
+        <p class="product-description">{{ product.description }}</p>
+
+        <!-- Star Rating System -->
+        <div class="rating">
+            <div class="stars">
+                ★★★★★
+                <span style="width: calc({{ product.average_rating|default:4.5 }} * 20%);">★★★★★</span>
+            </div>
+            <span class="rating-count">({{ product.rating_count|default:"12" }} reviews)</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="{% url 'product_list' %}" class="btn btn-back">Back to Products</a>
+            <button class="btn btn-rate">Rate This Product</button>
+        </div>
+    </div>
 </div>
+
+<!-- Font Awesome for icons (add this in your base template) -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<!-- Optional: JavaScript for interactive rating -->
+<script>
+    document.querySelector('.btn-rate').addEventListener('click', function() {
+        alert("Rating feature will be implemented soon!");
+    });
+</script>
 {% endblock %}
