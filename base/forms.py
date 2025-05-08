@@ -1,4 +1,3 @@
-# forms.py
 from django import forms
 from django.contrib.auth.models import User
 
@@ -25,3 +24,20 @@ class CustomSignupForm(forms.Form):
             raise forms.ValidationError("This username is already taken.")
         
         return cleaned_data
+
+
+class ContactForm(forms.Form):
+    first_name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={'placeholder': 'First Name'})
+    )
+    last_name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={'placeholder': 'Last Name'})
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'placeholder': 'Email Address'})
+    )
+    message = forms.CharField(
+        widget=forms.Textarea(attrs={'placeholder': 'Your Message'})
+    )

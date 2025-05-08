@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeleMarket</title>
-    <link rel="icon" href="{% static 'assets/tele.png' %}" sizes="16x16" type="image/x-icon">
-    <link rel="icon" href="{% static 'assets/tele.png' %}" sizes="32x32" type="image/x-icon">
-    <link rel="icon" href="{% static 'assets/tele.png' %}" sizes="192x192" type="image/x-icon">
+    <!-- Your favicon links -->
     <style>
         /* Reset and base styles */
         * {
@@ -16,30 +14,34 @@
             box-sizing: border-box;
         }
         
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-color: #f4f4f4;
-            padding-top: 70px; /* Matches navbar height */
+        html {
+            height: 100%;
+            overflow: hidden; /* Crucial for preventing overscroll */
         }
         
-        main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+        body {
+            height: 100%;
+            overflow: auto; /* Allows normal scrolling */
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: none; /* Disables pull-to-refresh and elastic scroll */
+            position: relative;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding-top: 70px; /* Navbar height */
+            padding-bottom: 60px; /* Footer height */
         }
+        
+        /* Keep all your existing styles below */
+        /* ... */
     </style>
 </head>
 <body>
     {% include 'navbar.html' %}
-    
+   
     <main>
         {% block content %}
         {% endblock %}
     </main>
+    {% include 'footer.html' %}
 </body>
 </html>

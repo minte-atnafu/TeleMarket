@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 
 from django.contrib.auth.models import User
-from .forms import CustomSignupForm
+from .forms import CustomSignupForm, ContactForm
 from django.contrib import messages
 from django.contrib.auth import authenticate
 
@@ -250,3 +250,14 @@ def set_password_view(request):
 
 # def set_password_view(request):
 #     return render(request, 'base/set_password.html')
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('contact_success')  # You'll need to create this view/URL
+    else:
+        form = ContactForm()
+    
+    return render(request, 'base/contact.html', {'form': form})
