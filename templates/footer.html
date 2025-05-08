@@ -1,0 +1,137 @@
+{% load static %}
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-contact">
+            <a href="mailto:telemarketethiopia@gmail.com" class="footer-email">
+                <i class="fas fa-envelope"></i> telemarketethiopia@gmail.com
+            </a>
+            <div class="footer-phone">
+                <i class="fas fa-phone"></i> +251 911 791126 / 973092466
+            </div>
+        </div>
+        
+        <div class="social-links">
+            <a href="[YOUR_LINKEDIN_URL]" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="[YOUR_TELEGRAM_URL]" target="_blank" aria-label="Telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
+            <a href="[YOUR_INSTAGRAM_URL]" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="[YOUR_FACEBOOK_URL]" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+        
+        <div class="footer-copyright">
+            <p>© 2025 TeleMarket Ethiopia. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+    /* Footer Styles */
+    .site-footer {
+     
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        padding: 2.5rem 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 0 20px;
+    }
+
+    .footer-email {
+        color: #f39c12;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .footer-email:hover {
+        color: #e67e22;
+        text-decoration: underline;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    .social-links a {
+        color: #ecf0f1;
+        font-size: 1.5rem;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: #f39c12;
+        transform: translateY(-3px);
+    }
+
+    .footer-copyright {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        margin-top: 0.5rem;
+    }
+    /* Add these new styles to your existing CSS */
+    .footer-phone {
+        margin-top: 0.5rem;
+        color: #ecf0f1;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .footer-phone i {
+        color: #f39c12;
+    }
+
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .footer-content {
+            text-align: center;
+        }
+        
+        .footer-email {
+            font-size: 1rem;
+        }
+        
+        .social-links {
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            font-size: 1.3rem;
+        }
+    }
+    .footer-contact {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+</style>
+
+<!-- Include Font Awesome in your head section -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

@@ -4,7 +4,7 @@
 {% load static %}
 <style>
     body {
-        background-color: #5f7c82;
+        background-color: #dee4e5;
         color: white;
         font-family: Arial, sans-serif;
     }
@@ -15,23 +15,83 @@
         
     }
 
-    .header {
-        padding: 20px;
+    /* Main Header Styles - Won't affect your existing navigation */
+    .main-header {
+        background: linear-gradient(135deg, #1e3c72 0%, #335ba1 100%);
+        color: white;
+        padding: 1rem 1rem;
         text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
     }
+    
+    .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .main-header h1 {
+        font-size: 3.2rem;
+        margin-bottom: 1rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    }
+    
+    .header-divider {
+        width: 100px;
+        height: 4px;
+        background: #f39c12;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .tagline {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+        font-weight: 300;
+        color: #ecf0f1;
+    }
+    
 
-    .header h1 {
-        font-weight: bold;
-        color: darkgreen;
+    
+    /* Decorative elements */
+    .main-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('{% static "assets/pattern.png" %}') repeat;
+        opacity: 0.05;
+        z-index: 1;
+    }
+    
+    @media (max-width: 768px) {
+        .main-header {
+            padding: 3rem 1.5rem;
+        }
+        
+        .main-header h1 {
+            font-size: 2.2rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+        }
     }
 
     .carousel {
             position: relative;
             width: 100%;
-            height: 500px; /* Adjust height as needed */
+            height: 620px; /* Adjust height as needed */
             overflow: hidden;
-            margin: 40px 0;
-            border-radius: 12px;
+            margin: 20px 0;
+            border-radius: 15px;
+            margin-left: 10px;
            
         }
         
@@ -130,58 +190,584 @@
         padding: 20px;
         text-align: center;
     }
+    /* Testimonials styles */
 
-    .testimonials {
-        margin-top: 40px;
+   /* Testimonials Section Styles */
+   .testimonials-section {
+        background-color: #f9f9f9;
+        padding: 80px 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .testimonials-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .section-header {
         text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    .divider {
+        width: 80px;
+        height: 4px;
+        background: #f39c12;
+        margin: 0 auto 20px;
+    }
+
+    .section-subtitle {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
     }
 
     .testimonial-card {
-        background-color: rgba(255, 255, 255, 0.1);
-        padding: 20px;
+        background: white;
         border-radius: 10px;
-        margin: 10px;
-        display: inline-block;
-        width: 30%;
-        box-sizing: border-box;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
     }
 
-    .testimonial-card img {
-        width: 100%;
-        height: 400px;
-        border-radius: 10px;
+    .testimonial-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     }
 
-    .product-images img {
+    .testimonial-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #f39c12;
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .user-image {
+        position: relative;
+        margin-right: 20px;
+    }
+
+    .user-image img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #f39c12;
+    }
+
+    .quote-icon {
+        position: absolute;
+        bottom: -10px;
+        right: -10px;
+        background: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-name {
+        font-size: 1.2rem;
+        color: #2c3e50;
+        margin-bottom: 5px;
+    }
+
+    .user-position {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    .testimonial-text {
+        color: #34495e;
+        line-height: 1.8;
+        font-size: 1rem;
+        margin-bottom: 20px;
+        font-style: italic;
+    }
+
+    .rating {
+        color: #ddd;
+        font-size: 1.2rem;
+    }
+
+    .rating .star.filled {
+        color: #f39c12;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .testimonial-card {
+        animation: fadeIn 0.6s ease forwards;
+        opacity: 0;
+    }
+
+    .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+    .testimonial-card:nth-child(2) { animation-delay: 0.3s; }
+    .testimonial-card:nth-child(3) { animation-delay: 0.5s; }
+    .testimonial-card:nth-child(4) { animation-delay: 0.7s; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 2rem;
+        }
+        
+        .testimonials-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+   /* About Us Section Styles */
+   .about-section {
+        background-color: #2c3e50;
+        color: white;
+        padding: 60px 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    .about-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .about-header h2 {
+        font-size: 2.5rem;
+        color: #f39c12;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    .about-header .divider {
         width: 80px;
-        margin: 5px;
+        height: 4px;
+        background: #f39c12;
+        margin: 0 auto 20px;
+    }
+
+    .about-content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .about-text {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .about-text p {
+        margin-bottom: 20px;
+        line-height: 1.8;
+        font-size: 1.1rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-highlight {
+        color: #f39c12;
+        font-weight: 600;
+    }
+
+    .team-section {
+        margin-top: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 10px;
+    }
+
+    .team-title {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #f39c12;
+        font-size: 1.5rem;
+    }
+
+    .team-members {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .team-member {
+        text-align: center;
+        width: 200px;
+    }
+
+    .member-photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #f39c12;
+        margin: 0 auto 15px;
+    }
+
+    .member-name {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .member-role {
+        color: #f39c12;
+        font-size: 0.9rem;
+    }
+
+    .about-pattern {
+        position: absolute;
+        opacity: 0.05;
+        z-index: 1;
+    }
+
+    .pattern-1 {
+        top: -50px;
+        right: -50px;
+        width: 300px;
+        height: 300px;
+    }
+
+    .pattern-2 {
+        bottom: -30px;
+        left: -30px;
+        width: 200px;
+        height: 200px;
+    }
+
+    @media (max-width: 768px) {
+        .about-text {
+            padding: 10px;
+        }
+        
+        .team-member {
+            width: 150px;
+        }
+    }
+
+
+      /* ====== Base Styles ====== */
+      :root {
+        --primary-blue: #2c3e50;
+        --accent-orange: #f39c12;
+        --light-gray: #ecf0f1;
+        --text-dark: #2c3e50;
+        --text-light: #ffffff;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ====== Shared Components ====== */
+    .section-title {
+        text-align: center;
+        margin: 2rem 0;
+        color: var(--primary-blue);
+        position: relative;
+    }
+    
+    .section-title:after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: var(--accent-orange);
+        margin: 10px auto;
+    }
+
+    .ai-badge {
+        background: var(--accent-orange);
+        color: white;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 10px;
+        margin-left: 8px;
+    }
+
+    /* ====== Categories Section ====== */
+    .categories-container {
+        padding: 2rem 5%;
+        background: var(--light-gray);
+    }
+
+    .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .category-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem 1rem;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+    }
+
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .category-icon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 1rem;
+    }
+
+    .category-card h3 {
+        color: var(--primary-blue);
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .category-card p {
+        color: var(--text-dark);
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+
+    /* ====== Featured Products ====== */
+    .featured-container {
+        padding: 2rem 5%;
+        background: white;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .product-card {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s;
+    }
+
+    .product-card:hover {
+        border-color: var(--accent-orange);
+    }
+
+    .product-image {
+        height: 180px;
+        width: 100%;
+        object-fit: contain;
+        background: #f9f9f9;
+        padding: 1rem;
+    }
+
+    .product-info {
+        padding: 1rem;
+    }
+
+    .product-title {
+        font-size: 1rem;
+        color: var(--primary-blue);
+        margin-bottom: 0.5rem;
+        height: 40px;
+        overflow: hidden;
+    }
+
+    .product-price {
+        font-weight: bold;
+        color: var(--primary-blue);
+        margin: 0.5rem 0;
+    }
+
+    .product-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        color: var(--text-dark);
+        opacity: 0.8;
+    }
+
+    /* ====== Deals Section ====== */
+    .deals-container {
+        padding: 2rem 5%;
+        background: var(--primary-blue);
+        color: white;
+    }
+
+    .deals-carousel {
+        display: flex;
+        overflow-x: auto;
+        gap: 1.5rem;
+        padding: 1rem 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .deal-card {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        color: var(--text-dark);
+    }
+
+    .deal-image {
+        height: 150px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .deal-details {
+        padding: 1rem;
+    }
+
+    .deal-title {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .deal-countdown {
+        color: var(--accent-orange);
+        font-weight: bold;
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+    }
+
+    .deal-price {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .original-price {
+        text-decoration: line-through;
+        opacity: 0.6;
+        font-size: 0.9rem;
+    }
+
+    .discounted-price {
+        font-weight: bold;
+        color: #e74c3c;
+    }
+
+    .deal-btn {
+        background: var(--accent-orange);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        width: 100%;
+        margin-top: 0.5rem;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .deal-btn:hover {
+        background: #e67e22;
+    }
+
+    /* ====== Responsive Adjustments ====== */
+    @media (max-width: 768px) {
+        .categories-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .products-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .categories-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 </style>
 
 <body>
     <div class="container">
         <!-- Header Section -->
-        <div class="header">
-            <h1>TELEMARKET ETHIOPIA</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id lectus gravida, dictum arcu sed,
-                porttitor sem. Fusce felis nisl, commodo nec mollis ut, pharetra malesuada turpis. Class Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Pellentesque id lectus gravida, dictum arcu sed, porttitor sem.
-                Fusce felis nisl, commodo nec mollis ut, pharetra malesuada turpis. Class</p>
-        </div>
+        <!-- <header class="main-header">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>TELEMARKET ETHIOPIA</h1>
+                    <div class="header-divider"></div>
+                    <p class="tagline">Ethiopia's Premier AI-Powered Marketplace</p>
+                </div>
+            </div>
+        </header> -->
 
-        <!-- Updated Carousel Section -->
+        <!-- Carousel Section -->
         <div class="carousel">
             <div class="carousel-inner">
                 <!-- Slide 1 - Laptops -->
-                <div class="carousel-slide active" style="background-image: url('{% static 'assets/photo2.jpg' %}')">                  
+               <div class="carousel-slide active" style="background-image: url({% static 'assets/pc.avif' %});">                  
                       <div class="slide-content">
-                        <h2>Your Next Laptop Is Here</h2>
+                        <h2>TELEMARKET ETHIOPIA</h2>
                         <p class="location">Paris, France</p>
-                        <p class="description">Discover cutting-edge performance, stunning displays, and smart features - all in our newest laptop collection.</p>
+                        <p class="description">Ethiopia's Premier AI-Powered Marketplace</p>
                         <!-- <button class="shop-now">Shop Now</button> -->
                     </div>
                 </div>
-                
+
+                <div class="carousel-slide active" style="background-image: url({% static 'assets/photo2.jpg' %});">                  
+                    <div class="slide-content">
+                      <h2>Your Next Laptop Is Here</h2>
+                      <p class="location">Paris, France</p>
+                      <p class="description">Discover cutting-edge performance, stunning displays, and smart features - all in our newest laptop collection.</p>
+                      <!-- <button class="shop-now">Shop Now</button> -->
+                  </div>
+              </div>
+
                 <!-- Slide 2 - Phones -->
                 <div class="carousel-slide active" style="background-image: url('{% static 'assets/phone2.jpg' %}')">             
                          <div class="slide-content">
@@ -205,27 +791,211 @@
             <button class="carousel-control-prev" onclick="prevSlide()">&#10094;</button>
             <button class="carousel-control-next" onclick="nextSlide()">&#10095;</button>
         </div>
+        <div class="container">
 
-        <!-- About Us Section -->
-        <div  id="about-section" class="about-section">
-            <h2>About Us</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque id lectus gravida, dictum arcu sed, porttitor sem.
-                Fusce felis nisl, commodo nec mollis ut, pharetra malesuada turpis. Class Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque id lectus gravida, dictum arcu sed, porttitor sem. Fusce felis nisl, commodo nec mollis ut, pharetra malesuada turpis. Class</p>
+        <!-- 1. Product Categories -->
+            <section class="categories-container">
+                <h2 class="section-title">Shop by Category</h2>
+                <div class="categories-grid">
+                    <!-- Category 1: Electronics -->
+                    <div class="category-card" onclick="trackCategoryClick('electronics')">
+                        <img src="{% static 'assets/tele.png' %}" alt="Electronics" class="category-icon">
+                        <h3>Electronics</h3>
+                        <p>Tecno, Samsung, Infinix</p>
+                    </div>
+                    
+                    <!-- Category 2: Fashion -->
+                    <div class="category-card" onclick="trackCategoryClick('fashion')">
+                        <img src="{% static 'assets/tele.png' %}" alt="Fashion" class="category-icon">
+                        <h3>Fashion</h3>
+                        <p>Clothing, Shoes, Bags</p>
+                    </div>
+                    
+                    <!-- Category 3: Home & Kitchen -->
+                    <div class="category-card" onclick="trackCategoryClick('home')">
+                        <img src="{% static 'assets/tele.png' %}" alt="Home" class="category-icon">
+                        <h3>Home & Kitchen</h3>
+                        <p>Appliances, Cookware</p>
+                    </div>
+                    
+                    <!-- Category 4: Groceries -->
+                    <div class="category-card" onclick="trackCategoryClick('groceries')">
+                        <img src="{% static 'assets/tele.png' %}" alt="Groceries" class="category-icon">
+                        <h3>Groceries</h3>
+                        <p>Coffee, Teff, Spices</p>
+                    </div>
+                    
+                    <!-- Category 5: Beauty -->
+                    <div class="category-card" onclick="trackCategoryClick('beauty')">
+                        <img src="{% static 'assets/tele.png' %}" alt="Beauty" class="category-icon">
+                        <h3>Beauty</h3>
+                        <p>Skincare, Haircare</p>
+                    </div>
+                    
+                    <!-- Category 6: Agriculture -->
+                    <div class="category-card" onclick="trackCategoryClick('agriculture')">
+                        <img src="{% static 'assets/tele.png' %}" alt="Agriculture" class="category-icon">
+                        <h3>Agriculture</h3>
+                        <p>Tools, Seeds</p>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 2. Featured Products -->
+    <section class="featured-container">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="{% static 'assets/tele.png' %}" alt="Tecno Spark 10" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Tecno Spark 10 (4GB/128GB)</h3>
+                    <p class="product-price">3,499 ETB</p>
+                    <div class="product-meta">
+                        <span>⭐ 4.2 (120)</span>
+                        <span class="ai-badge">AI Pick</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="{% static 'assets/tele.png' %}" alt="Coffee" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Yirgacheffe Coffee (1kg)</h3>
+                    <p class="product-price">450 ETB</p>
+                    <div class="product-meta">
+                        <span>⭐ 4.8 (95)</span>
+                        <span>Addis Only</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="{% static 'assets/tele.png' %}" alt="Injera Cooker" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Electric Mitad (Injera Cooker)</h3>
+                    <p class="product-price">6,200 ETB</p>
+                    <div class="product-meta">
+                        <span>⭐ 4.5 (76)</span>
+                        <span class="ai-badge">Trending</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="{% static 'assets/tele.png' %}" alt="Samsung TV" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Samsung Smart TV 43"</h3>
+                    <p class="product-price">18,999 ETB</p>
+                    <div class="product-meta">
+                        <span>⭐ 4.7 (210)</span>
+                        <span>Free Delivery</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<div class="row-container">
+
+
+
+       <!-- About Us Section -->
+<!-- About Us Section -->
+<section id="about-section" class="about-section">
+    <!-- Decorative patterns -->
+    <img src="{% static 'assets/tech-pattern.png' %}" class="about-pattern pattern-1" alt="Decorative pattern">
+    <img src="{% static 'assets/tech-pattern.png' %}" class="about-pattern pattern-2" alt="Decorative pattern">
+    
+    <div class="about-container">
+        <div class="about-header">
+            <h2>About Telemarket Ethiopia</h2>
+            <div class="divider"></div>
+        </div>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <p>Telemarket Ethiopia is an <span class="about-highlight">innovative final-year project</span> developed by Samuel Gashu and Mintesinot Atnafu, Computer Engineering students at Addis Ababa University, under the guidance of Dr. Biniam T. Our vision is to revolutionize the Ethiopian e-commerce landscape by introducing a smart, centralized platform driven by <span class="about-highlight">Artificial Intelligence</span>.</p>
+                
+                <p>Born out of a deep understanding of the fragmented and inefficient online shopping experience in Ethiopia, Telemarket Ethiopia aims to unify product discovery, customer insights, and seller accessibility through <span class="about-highlight">cutting-edge machine learning models</span> and intelligent system design. Our goal is to empower both consumers and merchants with a seamless, data-driven digital marketplace tailored to local needs.</p>
+                
+                <p>With a clear mission to enhance e-commerce through technology, we are committed to building <span class="about-highlight">scalable, secure, and ethically responsible</span> solutions that respect user data and address the unique challenges of our economy.</p>
+            </div>
+            
+            <div class="team-section">
+                <h3 class="team-title">Our Team</h3>
+                <div class="team-members">
+                    <div class="team-member">
+                        <img src="{% static 'assets/sami.jpg' %}" alt="Samuel Gashu" class="member-photo">
+                        <div class="member-name">Samuel Gashu</div>
+                        <div class="member-role">Co-Founder & Developer</div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="{% static 'assets/minte.jpg' %}" alt="Mintesinot Atnafu" class="member-photo">
+                        <div class="member-name">Mintesinot Atnafu</div>
+                        <div class="member-role">Co-Founder & Developer</div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="{% static 'assets/tele.png' %}" alt="Dr. Biniam T." class="member-photo">
+                        <div class="member-name">Dr. Biniam T.</div>
+                        <div class="member-role">Project Advisor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="testimonials-container">
+        <div class="section-header">
+            <h2 class="section-title">What Our Users Say</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">Trusted by thousands of buyers and sellers across Ethiopia</p>
         </div>
 
-        <!-- Testimonials Section -->
-        <div class="testimonials">
-            <h2>Testimonials</h2>
+        <div class="testimonials-grid">
             {% for t in testimonials %}
-                <div class="testimonial-card">
-                    <img src="{{ t.image.url }}" alt="{{ t.name }}">
-                    <p><strong>{{ t.name }}</strong></p>
-                    <p>{{ t.content }}</p>
+            <div class="testimonial-card">
+                <div class="card-header">
+                    <div class="user-image">
+                        <img src="{{ t.image.url }}" alt="{{ t.name }}">
+                        <div class="quote-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#f39c12">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="user-info">
+                        <h3 class="user-name">{{ t.name }}</h3>
+                        {% if t.position %}
+                        <p class="user-position">{{ t.position }}</p>
+                        {% endif %}
+                    </div>
                 </div>
+                <div class="card-body">
+                    <p class="testimonial-text">"{{ t.content }}"</p>
+                </div>
+                <div class="card-footer">
+                    <div class="rating">
+                        {% for i in "12345" %}
+                            <span class="star {% if forloop.counter <= t.rating %}filled{% endif %}">★</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
             {% endfor %}
         </div>
+    </div>
+</section>
+</div>
     </div>
 
     
