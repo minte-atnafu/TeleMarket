@@ -226,6 +226,153 @@
             font-size: 2rem;
         }
     }
+
+    /* search bar styling here below  */
+    .search-form {
+        margin: 30px 0;
+        padding: 25px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .search-fields {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .search-input-group,
+    .location-input {
+        position: relative;
+        flex: 1;
+        min-width: 250px;
+    }
+    
+    .search-icon,
+    .location-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        color: #8078C2;
+    }
+    
+    .search-input-group input,
+    .location-input input {
+        width: 100%;
+        padding: 12px 15px 12px 40px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        background-color: #f9f9f9;
+    }
+    
+    .search-input-group input:focus,
+    .location-input input:focus {
+        outline: none;
+        border-color: #8078C2;
+        box-shadow: 0 0 0 3px rgba(128, 120, 194, 0.2);
+        background-color: white;
+    }
+    
+    .price-range {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #f9f9f9;
+        padding: 5px;
+        border-radius: 8px;
+    }
+    
+    .price-input {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    
+    .currency {
+        position: absolute;
+        left: 12px;
+        color: #666;
+        font-weight: 500;
+    }
+    
+    .price-range input {
+        width: 100px;
+        padding: 12px 12px 12px 25px;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+    
+    .price-range input:focus {
+        outline: none;
+        border-color: #8078C2;
+        box-shadow: 0 0 0 3px rgba(128, 120, 194, 0.2);
+    }
+    
+    .range-separator {
+        color: #666;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    .search-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        background-color: #8078C2;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .search-button svg {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.3s ease;
+    }
+    
+    .search-button:hover {
+        background-color: #6b63aa;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(128, 120, 194, 0.3);
+    }
+    
+    .search-button:hover svg {
+        transform: translateX(3px);
+    }
+    
+    @media (max-width: 768px) {
+        .search-fields {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .search-input-group,
+        .location-input {
+            min-width: auto;
+        }
+        
+        .price-range {
+            justify-content: space-between;
+        }
+        
+        .price-range input {
+            width: 100%;
+        }
+    }
 </style>
 
 <div class="product-list-container">
@@ -233,6 +380,46 @@
         <h1 class="page-title">Discover Amazing Products</h1>
         <p>Browse our curated collection of premium items</p>
     </div>
+    <!-- these code for search products -->
+    <form method="GET" action="{% url 'product_search' %}" class="search-form">
+        <div class="search-fields">
+            <div class="search-input-group">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" name="q" placeholder="Search products..." value="{{ request.GET.q }}" class="search-input">
+            </div>
+            
+            <div class="price-range">
+                <div class="price-input">
+                    <span class="currency">$</span>
+                    <input type="number" name="min_price" placeholder="Min" value="{{ request.GET.min_price }}" min="0" step="0.01">
+                </div>
+                <span class="range-separator">to</span>
+                <div class="price-input">
+                    <span class="currency">$</span>
+                    <input type="number" name="max_price" placeholder="Max" value="{{ request.GET.max_price }}" min="0" step="0.01">
+                </div>
+            </div>
+            
+            <div class="location-input">
+                <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <input type="text" name="location" placeholder="Location" value="{{ request.GET.location }}">
+            </div>
+            
+            <button type="submit" class="search-button">
+                <span>Search</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </form>
+    <!-- the end of the search code section  -->
 
     <div class="product-grid">
         {% for product in products %}
