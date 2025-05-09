@@ -3,6 +3,7 @@ from .views import product_list,product_detail
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import product_search 
+app_name = 'product'
 urlpatterns = [
     path('', product_list, name='product_list'),
     path('<int:product_id>/', product_detail, name='product_detail'),

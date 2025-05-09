@@ -524,193 +524,390 @@
         margin-left: 8px;
     }
 
+
+
     /* ====== Categories Section ====== */
     .categories-container {
-        padding: 2rem 5%;
+        padding: 4rem 5%;
         background: var(--light-gray);
     }
-
+    
     .categories-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1.5rem;
-        margin-top: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        margin-top: 2.5rem;
     }
-
+    
     .category-card {
         background: white;
-        border-radius: 8px;
-        padding: 1.5rem 1rem;
+        border-radius: 16px;
+        padding: 2.5rem;
         text-align: center;
-        transition: transform 0.3s, box-shadow 0.3s;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         cursor: pointer;
-        box-shadow: var(--shadow);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
     }
-
+    
     .category-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
     }
-
+    
+    .category-icon-container {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+        border-radius: 50%;
+        padding: 20px;
+    }
+    
     .category-icon {
-        width: 50px;
-        height: 50px;
-        margin: 0 auto 1rem;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: transform 0.4s ease;
     }
-
+    
+    .category-card:hover .category-icon {
+        transform: scale(1.1);
+    }
+    
     .category-card h3 {
-        color: var(--primary-blue);
-        margin-bottom: 0.5rem;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+    
+    .category-card p {
+        color: #7f8c8d;
         font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    
+    .category-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #3498db 0%, #9b59b6 100%);
+        transition: height 0.3s ease;
+    }
+    
+    .category-card:hover::after {
+        height: 6px;
     }
 
-    .category-card p {
-        color: var(--text-dark);
-        font-size: 0.8rem;
-        opacity: 0.8;
-    }
+
+
 
     /* ====== Featured Products ====== */
-    .featured-container {
-        padding: 2rem 5%;
-        background: white;
+   .featured-container {
+        padding: 5rem 10%;
+        background: #f9f9f9;
     }
-
+    
+    .section-title {
+        text-align: center;
+        font-size: 2.2rem;
+        color: #2c3e50;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+    
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #3498db, #9b59b6);
+        margin: 1rem auto 0;
+        border-radius: 2px;
+    }
+    
     .products-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 1.5rem;
-        margin-top: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
     }
-
+    
     .product-card {
-        border: 1px solid #eee;
-        border-radius: 8px;
+        background: white;
+        border-radius: 16px;
         overflow: hidden;
-        transition: all 0.3s;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        position: relative;
     }
-
+    
     .product-card:hover {
-        border-color: var(--accent-orange);
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
-
+    
+    .product-image-container {
+        height: 280px;
+        background: #f5f7fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+    }
+    
     .product-image {
-        height: 180px;
-        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
         object-fit: contain;
-        background: #f9f9f9;
-        padding: 1rem;
+        transition: transform 0.4s ease;
     }
-
+    
+    .product-card:hover .product-image {
+        transform: scale(1.08);
+    }
+    
     .product-info {
-        padding: 1rem;
+        padding: 1.8rem;
     }
-
+    
     .product-title {
-        font-size: 1rem;
-        color: var(--primary-blue);
-        margin-bottom: 0.5rem;
-        height: 40px;
-        overflow: hidden;
+        font-size: 1.3rem;
+        color: #2c3e50;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        line-height: 1.4;
     }
-
+    
     .product-price {
-        font-weight: bold;
-        color: var(--primary-blue);
-        margin: 0.5rem 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #e74c3c;
+        margin: 1rem 0;
     }
-
+    
     .product-meta {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: 0.8rem;
-        color: var(--text-dark);
-        opacity: 0.8;
+        margin: 1.2rem 0;
     }
-
-    /* ====== Deals Section ====== */
-    .deals-container {
-        padding: 2rem 5%;
-        background: var(--primary-blue);
+    
+    .rating {
+        color: #f39c12;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+    
+    .ai-badge, .trending-badge, .delivery-badge, .location-badge {
+        padding: 0.35rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-block;
+    }
+    
+    .ai-badge {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+    
+    .trending-badge {
+        background: linear-gradient(135deg, #f12711 0%, #f5af19 100%);
+        color: white;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+    
+    .delivery-badge {
+        background: #27ae60;
         color: white;
     }
-
-    .deals-carousel {
-        display: flex;
-        overflow-x: auto;
-        gap: 1.5rem;
-        padding: 1rem 0;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
+    
+    .location-badge {
+        background: #3498db;
+        color: white;
     }
-
-    .deal-card {
-        flex: 0 0 280px;
-        scroll-snap-align: start;
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        color: var(--text-dark);
-    }
-
-    .deal-image {
-        height: 150px;
+    
+    .add-to-cart {
         width: 100%;
-        object-fit: cover;
-    }
-
-    .deal-details {
         padding: 1rem;
-    }
-
-    .deal-title {
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-    }
-
-    .deal-countdown {
-        color: var(--accent-orange);
-        font-weight: bold;
-        font-size: 0.9rem;
-        margin: 0.5rem 0;
-    }
-
-    .deal-price {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin: 0.5rem 0;
-    }
-
-    .original-price {
-        text-decoration: line-through;
-        opacity: 0.6;
-        font-size: 0.9rem;
-    }
-
-    .discounted-price {
-        font-weight: bold;
-        color: #e74c3c;
-    }
-
-    .deal-btn {
-        background: var(--accent-orange);
+        background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
         color: white;
         border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        width: 100%;
-        margin-top: 0.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
         cursor: pointer;
-        font-weight: bold;
-        transition: background 0.3s;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+    
+    .add-to-cart:hover {
+        background: linear-gradient(135deg, #2980b9 0%, #27ae60 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+        .featured-container {
+            padding: 3rem 5%;
+        }
+        
+        .products-grid {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-image-container {
+            height: 220px;
+            padding: 1.5rem;
+        }
     }
 
-    .deal-btn:hover {
-        background: #e67e22;
+    /* Visit Us Section Styles */
+    .visit-us-section {
+        padding: 5rem 2rem;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+        position: relative;
+        overflow: hidden;
     }
-
+    
+    .visit-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+    
+    .visit-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .visit-title {
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+    
+    .visit-subtitle {
+        font-size: 1.2rem;
+        color: #7f8c8d;
+        margin-bottom: 2rem;
+        max-width: 80%;
+    }
+    
+    .visit-cta {
+        margin-top: 2.5rem;
+    }
+    
+    .visit-button {
+        display: inline-flex;
+        align-items: center;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+        color: white;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .visit-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+        background: linear-gradient(135deg, #2980b9 0%, #27ae60 100%);
+    }
+    
+    .visit-button svg {
+        margin-left: 0.8rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .visit-button:hover svg {
+        transform: translateX(5px);
+    }
+    
+    .visit-image {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        height: 400px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .slideshow {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+    
+    .slide.active {
+        opacity: 1;
+    }
+    
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(52, 152, 219, 0.2) 0%, rgba(46, 204, 113, 0.2) 100%);
+    }
+    
+    @media (max-width: 768px) {
+        .visit-container {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+        
+        .visit-subtitle {
+            max-width: 100%;
+        }
+        
+        .visit-button {
+            margin: 0 auto;
+        }
+        
+        .visit-image {
+            height: 300px;
+            order: -1;
+        }
+    }
     /* ====== Responsive Adjustments ====== */
     @media (max-width: 768px) {
         .categories-grid {
@@ -793,119 +990,124 @@
         </div>
         <div class="container">
 
-        <!-- 1. Product Categories -->
-            <section class="categories-container">
-                <h2 class="section-title">Shop by Category</h2>
-                <div class="categories-grid">
-                    <!-- Category 1: Electronics -->
-                    <div class="category-card" onclick="trackCategoryClick('electronics')">
-                        <img src="{% static 'assets/tele.png' %}" alt="Electronics" class="category-icon">
-                        <h3>Electronics</h3>
-                        <p>Tecno, Samsung, Infinix</p>
-                    </div>
-                    
-                    <!-- Category 2: Fashion -->
-                    <div class="category-card" onclick="trackCategoryClick('fashion')">
-                        <img src="{% static 'assets/tele.png' %}" alt="Fashion" class="category-icon">
-                        <h3>Fashion</h3>
-                        <p>Clothing, Shoes, Bags</p>
-                    </div>
-                    
-                    <!-- Category 3: Home & Kitchen -->
-                    <div class="category-card" onclick="trackCategoryClick('home')">
-                        <img src="{% static 'assets/tele.png' %}" alt="Home" class="category-icon">
-                        <h3>Home & Kitchen</h3>
-                        <p>Appliances, Cookware</p>
-                    </div>
-                    
-                    <!-- Category 4: Groceries -->
-                    <div class="category-card" onclick="trackCategoryClick('groceries')">
-                        <img src="{% static 'assets/tele.png' %}" alt="Groceries" class="category-icon">
-                        <h3>Groceries</h3>
-                        <p>Coffee, Teff, Spices</p>
-                    </div>
-                    
-                    <!-- Category 5: Beauty -->
-                    <div class="category-card" onclick="trackCategoryClick('beauty')">
-                        <img src="{% static 'assets/tele.png' %}" alt="Beauty" class="category-icon">
-                        <h3>Beauty</h3>
-                        <p>Skincare, Haircare</p>
-                    </div>
-                    
-                    <!-- Category 6: Agriculture -->
-                    <div class="category-card" onclick="trackCategoryClick('agriculture')">
-                        <img src="{% static 'assets/tele.png' %}" alt="Agriculture" class="category-icon">
-                        <h3>Agriculture</h3>
-                        <p>Tools, Seeds</p>
-                    </div>
-                </div>
-            </section>
 
+        <!-- 1. Product Categories -->
+         <section class="categories-container">
+    <h2 class="section-title">Featured Categories</h2>
+    <div class="categories-grid">
+        {% for category in featured_categories %}
+        <div class="category-card" onclick="trackCategoryClick('{{ category.slug }}')">
+            <div class="category-icon-container">
+                <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-icon"
+                     onerror="this.onerror=null; this.src='{% static 'assets/default-category.png' %}'">
+            </div>
+            <h3>{{ category.name }}</h3>
+            <p>{{ category.description|default:"Premium products in this category" }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
 
             <!-- 2. Featured Products -->
-    <section class="featured-container">
-        <h2 class="section-title">Featured Products</h2>
-        <div class="products-grid">
-            <!-- Product 1 -->
-            <div class="product-card">
-                <img src="{% static 'assets/tele.png' %}" alt="Tecno Spark 10" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-title">Tecno Spark 10 (4GB/128GB)</h3>
-                    <p class="product-price">3,499 ETB</p>
-                    <div class="product-meta">
-                        <span>⭐ 4.2 (120)</span>
-                        <span class="ai-badge">AI Pick</span>
-                    </div>
-                </div>
+   <section class="featured-container">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="products-grid">
+        <!-- Product 1 -->
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="{% static 'assets/phone2.jpg' %}" alt="Tecno Spark 10" class="product-image">
+                <span class="ai-badge">AI Pick</span>
             </div>
-            
-            <!-- Product 2 -->
-            <div class="product-card">
-                <img src="{% static 'assets/tele.png' %}" alt="Coffee" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-title">Yirgacheffe Coffee (1kg)</h3>
-                    <p class="product-price">450 ETB</p>
-                    <div class="product-meta">
-                        <span>⭐ 4.8 (95)</span>
-                        <span>Addis Only</span>
-                    </div>
+            <div class="product-info">
+                <h3 class="product-title">Tecno Spark 10 (4GB/128GB)</h3>
+                <p class="product-price">3,499 ETB</p>
+                <div class="product-meta">
+                    <span class="rating">⭐ 4.2 (120)</span>
+                    <span class="delivery-badge">Free Delivery</span>
                 </div>
-            </div>
-            
-            <!-- Product 3 -->
-            <div class="product-card">
-                <img src="{% static 'assets/tele.png' %}" alt="Injera Cooker" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-title">Electric Mitad (Injera Cooker)</h3>
-                    <p class="product-price">6,200 ETB</p>
-                    <div class="product-meta">
-                        <span>⭐ 4.5 (76)</span>
-                        <span class="ai-badge">Trending</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Product 4 -->
-            <div class="product-card">
-                <img src="{% static 'assets/tele.png' %}" alt="Samsung TV" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-title">Samsung Smart TV 43"</h3>
-                    <p class="product-price">18,999 ETB</p>
-                    <div class="product-meta">
-                        <span>⭐ 4.7 (210)</span>
-                        <span>Free Delivery</span>
-                    </div>
-                </div>
+                <button class="add-to-cart">Add to Cart</button>
             </div>
         </div>
-    </section>
+        
+        <!-- Product 2 -->
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="{% static 'assets/pc.avif' %}" alt="Yirgacheffe Coffee" class="product-image">
+                <span class="trending-badge">Trending</span>
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">Yirgacheffe Coffee (1kg)</h3>
+                <p class="product-price">450 ETB</p>
+                <div class="product-meta">
+                    <span class="rating">⭐ 4.8 (95)</span>
+                    <span class="location-badge">Addis Only</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+        
+        <!-- Product 3 -->
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="{% static 'assets/shoe2.jpg' %}" alt="Electric Mitad" class="product-image">
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">Electric Mitad (Injera Cooker)</h3>
+                <p class="product-price">6,200 ETB</p>
+                <div class="product-meta">
+                    <span class="rating">⭐ 4.5 (76)</span>
+                    <span class="delivery-badge">Free Delivery</span>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</section>
 <div class="row-container">
 
+<!-- Beautiful Visit Us Section -->
+<section class="visit-us-section">
+    <div class="visit-container">
+        <div class="visit-content">
+            <h2 class="visit-title">Explore Our Exclusive Collection</h2>
+            <p class="visit-subtitle">Discover premium products curated just for you</p>
+            
+            <div class="visit-cta">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'product:product_list' %}" class="visit-button">
+                        <span>Browse Products</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                {% else %}
+                    <a href="{% url 'signup' %}" class="visit-button">
+                        <span>Join Now to Explore</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <path d="M20 8v6M23 11h-6"/>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="visit-image">
+            <!-- Slideshow container -->
+            <div class="slideshow">
+                <img src="{% static 'assets/show1.avif' %}" alt="Showroom Image 1" class="slide active">
+                <img src="{% static 'assets/Showroom.jpg' %}" alt="Showroom Image 2" class="slide">
+                <img src="{% static 'assets/show3.avif' %}" alt="Showroom Image 3" class="slide">
+            </div>
+            <div class="image-overlay"></div>
+        </div>
+    </div>
+</section>
 
-
-       <!-- About Us Section -->
+       
 <!-- About Us Section -->
-<section id="about-section" class="about-section">
+<section id="about-section" class="about-section" style="scroll-margin-top: 80px;">
     <!-- Decorative patterns -->
     <img src="{% static 'assets/tech-pattern.png' %}" class="about-pattern pattern-1" alt="Decorative pattern">
     <img src="{% static 'assets/tech-pattern.png' %}" class="about-pattern pattern-2" alt="Decorative pattern">
@@ -1022,6 +1224,71 @@
 
         // Auto-advance slides every 5 seconds
         setInterval(nextSlide, 5000);
+         document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            const target = document.getElementById('about-section');
+            if (target) {
+                const navbarHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = target.offsetTop - navbarHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }, 300);  // Slightly longer delay for full page load
+    });
+    // Add hover effects and basic interactions
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.querySelector('.add-to-cart').style.opacity = '1';
+            this.querySelector('.add-to-cart').style.transform = 'translateY(0)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.querySelector('.add-to-cart').style.opacity = '0';
+            this.querySelector('.add-to-cart').style.transform = 'translateY(10px)';
+        });
+        
+        // Initialize button state
+        const button = card.querySelector('.add-to-cart');
+        button.style.opacity = '0';
+        button.style.transform = 'translateY(10px)';
+        button.style.transition = 'all 0.3s ease';
+    });
+
+    // script for vits us section
+     document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        
+        // Start the slideshow
+        showSlide(0);
+        
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+        
+        // Optional: Pause on hover
+        const slideshow = document.querySelector('.slideshow');
+        slideshow.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        slideshow.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+        
+        let slideInterval = setInterval(nextSlide, 5000);
+    });
     </script>
 </body>
 {% endblock %}
