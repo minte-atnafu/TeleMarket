@@ -22,14 +22,22 @@ import random
 import time
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login  # Renamed to avoid conflict
-from .models import Testimonial  # import your model
+from .models import Testimonial, Category  # import your model
 import smtplib
 from django.core.mail import EmailMessage
+from django.contrib.auth import logout as auth_logout
 # Create your views here.
 
 def home(request):
-    testimonials = Testimonial.objects.all()  # fetch all testimonials
-    return render(request, 'base/home.html', {'testimonials': testimonials})
+    testimonials = Testimonial.objects.all()
+    featured_categories = Category.objects.filter(is_featured=True)[:3]  # Get 3 featured categories
+    
+    context = {
+        'testimonials': testimonials,
+        'featured_categories': featured_categories,  # Add categories to context
+        'scroll_to_about': '#about-section' in request.get_full_path()
+    }
+    return render(request, 'base/home.html', context)  # Pass the complete context
 
 def signup(request):
     if request.method == 'POST':
@@ -289,3 +297,9 @@ def contact_view(request):
         return redirect('contact')
     
     return render(request, 'base/contact.html')
+
+def logout_view(request):
+    """Handle user logout"""
+    auth_logout(request)
+    messages.success(request, "You have been successfully logged out.")
+    return redirect('home')    

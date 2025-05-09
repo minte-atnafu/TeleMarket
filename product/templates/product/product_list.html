@@ -381,7 +381,7 @@
         <p>Browse our curated collection of premium items</p>
     </div>
     <!-- these code for search products -->
-    <form method="GET" action="{% url 'product_search' %}" class="search-form">
+    <form method="GET" action="{% url 'product:product_search' %}" class="search-form">
         <div class="search-fields">
             <div class="search-input-group">
                 <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -421,14 +421,14 @@
     </form>
     <!-- the end of the search code section  -->
 
-    <div class="product-grid">
+   <div class="product-grid" id="product-container">
         {% for product in products %}
         <div class="product-card">
             {% if product.is_featured %}
             <span class="product-badge">Featured</span>
             {% endif %}
             
-            <a href="{% url 'product_detail' product.id %}">
+            <a href="{% url 'product:product_detail' product.id %}">
                 <div class="product-image-container">
                     {% if product.media_path %}
                         <img src="/media/{{ product.media_path }}" alt="{{ product.product_name }}" class="product-image">
@@ -477,6 +477,7 @@
     </div>
 </div>
 
+
 <!-- Font Awesome for icons -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
@@ -500,6 +501,50 @@
         cards.forEach(card => {
             observer.observe(card);
         });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('product-container');
+        if (container) {
+            // Convert NodeList to array for shuffling
+            const cards = Array.from(container.children);
+            
+            // Remove the empty-state if present (we'll re-add it if needed)
+            const emptyState = cards.find(card => card.classList.contains('empty-state'));
+            const filteredCards = cards.filter(card => !card.classList.contains('empty-state'));
+            
+            // Only shuffle if we have products to display
+            if (filteredCards.length > 0) {
+                // Clear the container
+                container.innerHTML = '';
+                
+                // Fisher-Yates shuffle algorithm
+                for (let i = filteredCards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [filteredCards[i], filteredCards[j]] = [filteredCards[j], filteredCards[i]];
+                }
+                
+                // Append shuffled cards
+                filteredCards.forEach(card => container.appendChild(card));
+            } else if (emptyState) {
+                // If no products, just show the empty state
+                container.appendChild(emptyState);
+            }
+            
+            // Add animations to shuffled products
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.product-card').forEach(card => {
+                observer.observe(card);
+            });
+        }
     });
 </script>
 {% endblock %}

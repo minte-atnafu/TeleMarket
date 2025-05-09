@@ -6,7 +6,8 @@ from .views import (
     forgot_password_view, 
     recovery_view,
     set_password_view,
-    contact_view
+    contact_view,
+    logout_view
 )
 
 urlpatterns = [
@@ -15,6 +16,7 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('login/', user_login, name='login'),
     path('contact/', contact_view, name='contact'),
+    path('logout/',logout_view, name='logout' ),
 
     
     # Custom Password Reset Flow

@@ -1,5 +1,6 @@
 from django.db import models # type: ignore
 
+
 class Product(models.Model):
     id = models.CharField(max_length=255, primary_key=True)  # Match DB column type
     product_name = models.CharField(max_length=255)  # Match DB column
