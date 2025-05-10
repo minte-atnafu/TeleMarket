@@ -134,6 +134,36 @@
         background: #e6c200;
     }
 
+    .rating {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+/* star rating */
+#rating-stars {
+    font-size: 24px;
+    color: #ccc; /* Default color for unselected stars */
+    position: relative;
+    display: inline-block;
+}
+
+#rating-stars .star {
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-right: 2px;
+}
+
+#rating-stars .star:hover,
+#rating-stars .star:hover ~ .star {
+    color: gold !important;
+}
+
+.rating-count {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-left: 8px;
+}
+
     /* Responsive */
     @media (max-width: 480px) {
         .product-card {
@@ -148,8 +178,11 @@
     {% else %}
         <img src="{% static 'default.jpg' %}" alt="No Image" class="product-image">
     {% endif %}
-
+   
     <div class="product-details">
+         <form style="display: none;">
+        {% csrf_token %}
+    </form>
         <h1 class="product-title">{{ product.product_name }}</h1>
         <div class="product-price">${{ product.price }}</div>
 
@@ -165,18 +198,24 @@
 
         <p class="product-description">{{ product.description }}</p>
 
-        <!-- Star Rating System -->
+        <!-- Interactive Star Rating System -->
         <div class="rating">
-            <div class="stars">
-                ★★★★★
-                <span style="width: calc({{ product.average_rating|default:4.5 }} * 20%);">★★★★★</span>
+            <div class="stars" id="rating-stars">
+                {% for i in "12345" %}
+                    <span class="star" data-value="{{ i }}">★</span>
+                {% endfor %}
             </div>
-            <span class="rating-count">({{ product.rating_count|default:"12" }} reviews)</span>
+            <span class="rating-count">
+                ({{ product.rating_count }} review{{ product.rating_count|pluralize }})
+            </span>
+            <div class="average-rating" style="display: none;">
+                Average: {{ product.average_rating|default:"0"|floatformat:1 }}
+            </div>
         </div>
 
         <!-- Action Buttons -->
         <div class="action-buttons">
-            <a href="{% url 'product_list' %}" class="btn btn-back">Back to Products</a>
+            <a href="{% url 'product:product_list' %}" class="btn btn-back">Back to Products</a>
             <button class="btn btn-rate">Rate This Product</button>
         </div>
     </div>
@@ -187,8 +226,183 @@
 
 <!-- Optional: JavaScript for interactive rating -->
 <script>
-    document.querySelector('.btn-rate').addEventListener('click', function() {
-        alert("Rating feature will be implemented soon!");
+document.addEventListener('DOMContentLoaded', function() {
+    const starsContainer = document.getElementById('rating-stars');
+    const stars = starsContainer.querySelectorAll('.star');
+    const ratingCount = document.querySelector('.rating-count');
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+    
+    // Set initial rating display
+    const initialRating = parseFloat('{{ product.average_rating|default:0 }}') || 0;
+    highlightStars(initialRating);
+    
+    // Add hover effects
+    stars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+            const value = parseInt(star.getAttribute('data-value'));
+            highlightStars(value);
+        });
+        
+        star.addEventListener('mouseout', () => {
+            highlightStars(initialRating);
+        });
+        
+        star.addEventListener('click', async () => {
+            const value = parseInt(star.getAttribute('data-value'));
+            await submitRating(value);
+        });
     });
+    
+    function highlightStars(rating) {
+        const fullStars = Math.floor(rating);
+        const partialStar = rating - fullStars;
+        
+        stars.forEach((star, index) => {
+            const starValue = index + 1;
+            star.style.color = starValue <= fullStars ? 'gold' : 
+                             (starValue === fullStars + 1 && partialStar > 0) ? 
+                             `rgba(255, 215, 0, ${partialStar})` : '#ccc';
+        });
+    }
+// Get URL and elements once when page loads
+const rateUrl = "{% url 'product:rate_product' product.id %}";
+async function submitRating(rating) {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+    if (!csrfToken) {
+        showToast('Please reload the page and try again', 'error');
+        return;
+    }
+
+    try {
+        const response = await fetch(rateUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ rating: rating })
+        });
+
+        // First check for non-JSON responses
+        if (response.status === 400 && !response.headers.get('content-type')?.includes('application/json')) {
+            const text = await response.text();
+            if (text.includes('CSRF')) {
+                throw new Error('CSRF verification failed');
+            }
+            throw new Error(text || 'Invalid request');
+        }
+
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || `Server error: ${response.status}`);
+        }
+
+        if (!data.success) {
+            throw new Error(data.error || 'Rating failed');
+        }
+
+        // Success case
+        updateRatingDisplay(data.average_rating, data.rating_count);
+        showToast('Rating saved!', 'success');
+        
+    } catch (error) {
+        console.error('Rating error:', error);
+        handleRatingError(error);
+    }
+}
+
+function handleRatingError(error) {
+    let userMessage = 'Failed to submit rating';
+    
+    if (error.message.includes('CSRF')) {
+        userMessage = 'Security error - please refresh the page';
+    } else if (error.message.includes('Authentication')) {
+        userMessage = 'Please login to rate products';
+    } else if (error.message.includes('Product not found')) {
+        userMessage = 'Product no longer available';
+    } else if (error.message.includes('Invalid rating value')) {
+        userMessage = 'Please select a rating between 1-5 stars';
+    }
+    
+    showToast(userMessage, 'error');
+}
+
+function updateRatingDisplay(averageRating, ratingCount) {
+    highlightStars(averageRating);
+    document.querySelector('.rating-count').textContent = 
+        `(${ratingCount} review${ratingCount !== 1 ? 's' : ''})`;
+}
+
+    // Improved toast notification function
+    function showToast(message, type = 'success') {
+        // Remove existing toasts
+        document.querySelectorAll('.toast').forEach(toast => toast.remove());
+        
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `
+            <div class="toast-icon"></div>
+            <div class="toast-message">${message}</div>
+        `;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.classList.add('fade-out');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // Rate button handler
+    document.querySelector('.btn-rate')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        showToast('Please click on the stars to rate this product', 'info');
+    });
+
+    // Add enhanced CSS for toast notifications
+    const style = document.createElement('style');
+    style.textContent = `
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            border-radius: 4px;
+            color: white;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: fadeIn 0.3s ease-out;
+            max-width: 90%;
+        }
+        .toast-success {
+            background-color: #4CAF50;
+        }
+        .toast-error {
+            background-color: #F44336;
+        }
+        .toast-info {
+            background-color: #2196F3;
+        }
+        .toast-icon {
+            font-size: 20px;
+        }
+        .toast.fade-out {
+            animation: fadeOut 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(20px); }
+        }
+    `;
+    document.head.appendChild(style);
+});
 </script>
 {% endblock %}

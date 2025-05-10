@@ -1,0 +1,10 @@
+Watching for file changes with StatReloader
+C:\Users\mintesinot\TeleMarket\TeleMarket\settings.py changed, reloading.
+INFO 2025-05-10 15:56:27,481 autoreload Watching for file changes with StatReloader
+INFO 2025-05-10 15:57:21,546 autoreload C:\Users\mintesinot\TeleMarket\TeleMarket\urls.py changed, reloading.
+INFO 2025-05-10 15:57:22,999 autoreload Watching for file changes with StatReloader
+INFO 2025-05-10 15:59:46,011 autoreload C:\Users\mintesinot\TeleMarket\TeleMarket\urls.py changed, reloading.
+INFO 2025-05-10 15:59:47,847 autoreload Watching for file changes with StatReloader
+INFO 2025-05-10 15:59:49,676 autoreload C:\Users\mintesinot\TeleMarket\TeleMarket\urls.py changed, reloading.
+INFO 2025-05-10 15:59:52,409 autoreload Watching for file changes with StatReloader
+INFO 2025-05-10 15:59:56,951 autoreload C:\Users\mintesinot\TeleMarket\TeleMarket\settings.py changed, reloading.

@@ -18,7 +18,20 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponse
+
+def show_urls(request):
+    from django.urls import get_resolver
+    urls = []
+    for url_pattern in get_resolver().url_patterns:
+        urls.append(str(url_pattern))
+    return HttpResponse('<pre>' + '\n'.join(urls) + '</pre>')
+
+
+
+
 urlpatterns = [
+    path('urls-debug/', show_urls),  # Add this temporary route
     path('admin/', admin.site.urls),
     path('product/', include('product.urls')),
     path('', include('base.urls')),
