@@ -22,3 +22,9 @@ class AppDatabaseRouter:
         if app_label == 'product':
             return db == 'product_db'  # Product app should only migrate to products_db
         return db == 'default'  # Everything else should use the default DB
+    def allow_relation(self, obj1, obj2, **hints):
+        """Allow relations between product and auth models."""
+        db_list = ('default', 'product_db')
+        if obj1._state.db in db_list and obj2._state.db in db_list:
+            return True
+        return None
