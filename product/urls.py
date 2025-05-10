@@ -2,9 +2,10 @@ from django.urls import path
 from .views import product_list,product_detail
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import product_search 
+from .views import product_search , rate_product
 app_name = 'product'
 urlpatterns = [
+    path('<int:product_id>/rate/', rate_product, name='rate_product'),
     path('', product_list, name='product_list'),
     path('<int:product_id>/', product_detail, name='product_detail'),
     path('search/', product_search, name='product_search'),
