@@ -59,25 +59,29 @@ def rate_product(request, product_id):
         # Parse the JSON data
         data = json.loads(request.body)
         rating_value = int(data.get('rating'))
-        
+
         # Validate rating (1-5)
         if not 1 <= rating_value <= 5:
             return JsonResponse({'error': 'Rating must be between 1 and 5'}, status=400)
-            
-        # Get product and save rating (example)
+
+        # Get product
         product = Product.objects.get(id=product_id)
-        Rating.objects.create(
+
+        # Save or update rating
+        Rating.objects.update_or_create(
             product=product,
             user=request.user,
-            rating=rating_value
+            defaults={'rating': rating_value}
         )
-        
+
+        # Return full rating info
         return JsonResponse({
             'success': True,
             'message': 'Rating saved successfully',
-            'rating': rating_value
+            'average_rating': product.average_rating,
+            'rating_count': product.rating_count
         })
-        
+
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON data'}, status=400)
     except Product.DoesNotExist:
