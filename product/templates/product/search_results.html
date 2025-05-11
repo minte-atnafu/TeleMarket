@@ -1,18 +1,23 @@
 {% extends 'main.html' %}
-{% load static %}  <!-- Add this line at the top -->
+{% load static %}
 
 {% block content %}
 <div class="search-results">
-    <h2>Search Results</h2>
+    <div class="search-header">
+        <h2>Search Results for "{{ request.GET.q }}"</h2>
+        <a href="{% url 'product:product_list' %}" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Products
+        </a>
+    </div>
     
     {% if products %}
         <div class="results-count">
-            Found {{ products.count }} product{{ products.count|pluralize }}
+            Found {{ products.count }} product{{ products.count|pluralize }} for "{{ request.GET.q }}"
         </div>
         
         <div class="product-list">
            {% for product in products %}
-<a href="{% url 'product:product_detail' product.id %}" class="product-link">
+<a href="{% url 'product:product_detail' product.id %}?from=search&q={{ request.GET.q|urlencode }}" class="product-link">
     <div class="product-card">
         {% if product.media_path %}
             <div class="product-image">
@@ -36,18 +41,51 @@
     </div>
 </a>
 {% endfor %}
-
         </div>
     {% else %}
-        <p class="no-results">No products found matching your search criteria.</p>
+        <p class="no-results">No products found matching "{{ request.GET.q }}"</p>
     {% endif %}
 </div>
 
 <style>
+    .search-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background-color: #8078C2;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+    
+    .back-button:hover {
+        background-color: #6a62b0;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .back-button i {
+        transition: transform 0.3s ease;
+    }
+    
+    .back-button:hover i {
+        transform: translateX(-3px);
+    }
+
     .product-link {
-    text-decoration: none;
-    color: inherit;
-}
+        text-decoration: none;
+        color: inherit;
+    }
 
     .search-results {
         max-width: 1200px;
@@ -109,4 +147,7 @@
         padding: 20px;
     }
 </style>
+
+<!-- Include Font Awesome for the arrow icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 {% endblock %}
