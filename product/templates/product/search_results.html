@@ -11,30 +11,32 @@
         </div>
         
         <div class="product-list">
-            {% for product in products %}
-            <div class="product-card">
-                <!-- Product Image -->
-                {% if product.media_path %}
-                    <div class="product-image">
-                        <img src="/media/{{ product.media_path }}" alt="{{ product.product_name }}"
-                             onerror="this.onerror=null; this.src='{% static 'assets/default-product.png' %}'">
-                    </div>
-                {% endif %}
-                
-                <h3>{{ product.product_name }}</h3>
-                <p class="price">Price: 
-                    {% if product.price %}
-                        ${{ product.price|floatformat:2 }}
-                    {% else %}
-                        Not specified
-                    {% endif %}
-                </p>
-                <p class="location">Location: {{ product.location|default:"Not specified" }}</p>
-                {% if product.username %}
-                    <p class="seller">Seller: {{ product.username }}</p>
-                {% endif %}
+           {% for product in products %}
+<a href="{% url 'product:product_detail' product.id %}" class="product-link">
+    <div class="product-card">
+        {% if product.media_path %}
+            <div class="product-image">
+                <img src="/media/{{ product.media_path }}" alt="{{ product.product_name }}"
+                     onerror="this.onerror=null; this.src='{% static 'assets/default-product.png' %}'">
             </div>
-            {% endfor %}
+        {% endif %}
+
+        <h3>{{ product.product_name }}</h3>
+        <p class="price">
+            {% if product.price %}
+                ${{ product.price|floatformat:2 }}
+            {% else %}
+                Not specified
+            {% endif %}
+        </p>
+        <p class="location">Location: {{ product.location|default:"Not specified" }}</p>
+        {% if product.username %}
+            <p class="seller">Seller: {{ product.username }}</p>
+        {% endif %}
+    </div>
+</a>
+{% endfor %}
+
         </div>
     {% else %}
         <p class="no-results">No products found matching your search criteria.</p>
@@ -42,6 +44,11 @@
 </div>
 
 <style>
+    .product-link {
+    text-decoration: none;
+    color: inherit;
+}
+
     .search-results {
         max-width: 1200px;
         margin: 20px auto;
