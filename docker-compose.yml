@@ -1,6 +1,5 @@
-
-
 services:
+
   web:
     build: .
     command: >
@@ -19,7 +18,7 @@ services:
       - DB_NAME2=TeleMarket
       - DB_USER=postgres
       - DB_PASSWORD=1993minte
-      - DB_HOST=db  # Changed from localhost to 'db' (service name)
+      - DB_HOST=127.0.0.1  # Changed from localhost to 'db' (service name)
       - DB_PORT=5432
       - EMAIL_HOST_USER=telemarketethiopia@gmail.com
       - EMAIL_HOST_PASSWORD=dzry vprl tfyq wqae
@@ -27,7 +26,7 @@ services:
     restart: unless-stopped
 
   db:
-    image: postgres:13
+    image: postgres:14  # Updated to PostgreSQL 14
     volumes:
       - postgres_data:/var/lib/postgresql/data/
       - ./init-scripts:/docker-entrypoint-initdb.d
