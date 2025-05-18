@@ -1,6 +1,9 @@
 {% load static %}
 {% block content %}
 <title>{{ product.name }}</title>
+
+
+
 <style>
     :root {
         --primary-color: #698A92;
@@ -219,12 +222,11 @@
 </style>
 
 <div class="product-card">
-    {% if product.media_path %}
+ {% if product.media_path %}
         <img src="/media/{{ product.media_path }}" alt="{{ product.product_name }}" class="product-image">
     {% else %}
         <img src="{% static 'default.jpg' %}" alt="No Image" class="product-image">
     {% endif %}
-   
     <div class="product-details">
          <form style="display: none;">
         {% csrf_token %}
@@ -276,8 +278,7 @@
     </div>
 </div>
 
-<!-- Font Awesome for icons -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 
 <!-- JavaScript for interactive rating (same as before) -->
 <script>
