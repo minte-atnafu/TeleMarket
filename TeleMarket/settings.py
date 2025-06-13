@@ -125,18 +125,21 @@ WSGI_APPLICATION = 'TeleMarket.wsgi.application'
 
 
 # datbase that is found on Neon 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('CONNECT_DB_NAME'),
+#         'USER': config('CONNECT_DB_USER'),
+#         'PASSWORD': config('CONNECT_DB_PASSWORD'),
+#         'HOST': config('CONNECT_DB_HOST'),
+#         'PORT': config('CONNECT_DB_PORT'),
+#         'OPTIONS': {
+#             'sslmode': 'require',
+#         },
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('CONNECT_DB_NAME'),
-        'USER': config('CONNECT_DB_USER'),
-        'PASSWORD': config('CONNECT_DB_PASSWORD'),
-        'HOST': config('CONNECT_DB_HOST'),
-        'PORT': config('CONNECT_DB_PORT'),
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
-    }
+    'default': dj_database_url.config(default=config('CONNECT_DATABASE_URL'))
 }
     
 
