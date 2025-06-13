@@ -1,3 +1,4 @@
+```html
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -5,42 +6,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeleMarket</title>
-    
-    <!-- Include FontAwesome from CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Your favicon links -->
+    <link rel="icon" type="image/x-icon" href="{% get_media_prefix %}favicon.ico">
     <style>
-        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
         html {
             height: 100%;
-            overflow: hidden; /* Crucial for preventing overscroll */
+            overflow: hidden;
         }
-        
         body {
             height: 100%;
-            overflow: auto; /* Allows normal scrolling */
+            overflow: auto;
             -webkit-overflow-scrolling: touch;
-            overscroll-behavior-y: none; /* Disables pull-to-refresh and elastic scroll */
+            overscroll-behavior-y: none;
             position: relative;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            padding-top: 70px; /* Navbar height */
-            padding-bottom: 60px; /* Footer height */
+            padding-top: 70px;
+            padding-bottom: 60px;
         }
-        
-        /* Keep all your existing styles below */
-        /* ... */
     </style>
 </head>
 <body>
     {% include 'navbar.html' %}
-   
     <main>
         {% block content %}
         {% endblock %}
@@ -48,3 +40,16 @@
     {% include 'footer.html' %}
 </body>
 </html>
+```
+
+### If It Fails:
+Please provide:
+- Confirmation that `photos/favicon.ico` exists in the `telemarket` S3 bucket.
+- Whether `https://telemarket.s3.amazonaws.com/photos/favicon.ico` is accessible in a browser (include any error messages).
+- Output of `python manage.py runserver 0.0.0.0:9000 --verbose`.
+- Output of `pip show django-storages boto3 python-decouple`.
+- Whether PowerShell is running as Administrator.
+- Any antivirus software installed.
+- The browser used and whether cache was cleared (e.g., via incognito mode).
+
+This will fix the favicon issue by ensuring it’s correctly uploaded to S3 and referenced in `main.html`, while maintaining your S3 media setup and port 9000 configuration.

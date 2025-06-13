@@ -21,8 +21,12 @@
     <div class="product-card">
         {% if product.media_path %}
             <div class="product-image">
-                <img src="/media/{{ product.media_path }}" alt="{{ product.product_name }}"
-                     onerror="this.onerror=null; this.src='{% static 'assets/default-product.png' %}'">
+                                {% if product.media_path %}
+    <img src="{% get_media_prefix %}{{ product.media_path }}" alt="{{ product.product_name }}" class="product-image">
+{% else %}
+    <img src="{% static 'default.jpg' %}" alt="No Image" class="product-image">
+{% endif %}
+           
             </div>
         {% endif %}
 
