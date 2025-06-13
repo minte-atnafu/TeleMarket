@@ -141,7 +141,10 @@ WSGI_APPLICATION = 'TeleMarket.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(default=config('CONNECT_DATABASE_URL'))
 }
-    
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://telemarket-4e8i.onrender.com",
+]    
 
 # DATABASE_ROUTERS = ['database_router.AppDatabaseRouter']
 
