@@ -11,7 +11,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_protect
 from django.http import JsonResponse
 import json
-
+from .utils.telegram_username_mapper import get_telegram_username  # Import the mapper
 
 def product_list(request):
     products = Product.objects.all()
@@ -34,7 +34,7 @@ def product_list(request):
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
-    # Handle media path
+    # Handle media path (existing code)
     if product.media_path:
         relative_path = product.media_path
         full_path = os.path.join(settings.MEDIA_ROOT, relative_path) if relative_path else None
@@ -43,12 +43,15 @@ def product_detail(request, product_id):
             relative_path = "photos/default.jpg"
         product.media_path = relative_path
 
+    # Get Telegram username - USING product.username
+    telegram_username = get_telegram_username(product.username)  # Key change here
+
     context = {
         'product': product,
         'MEDIA_URL': settings.MEDIA_URL,
-        # These will now use the properties we defined in the model
         'average_rating': product.average_rating,
         'rating_count': product.rating_count,
+        'telegram_username': telegram_username,
     }
     return render(request, 'product/product_detail.html', context)
 @require_POST

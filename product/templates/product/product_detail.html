@@ -225,7 +225,7 @@
  {% if product.media_path %}
     <img src="{% get_media_prefix %}{{ product.media_path }}" alt="{{ product.product_name }}" class="product-image">
 {% else %}
-    <img src="{% static 'default.jpg' %}" alt="No Image" class="product-image">
+    <img src="{% static 'default1.jpg' %}" alt="No Image" class="product-image">
 {% endif %}
            
     <div class="product-details">
@@ -235,10 +235,14 @@
         <h1 class="product-title">{{ product.product_name }}</h1>
         <div class="product-price">{{ product.price }} birr</div>
 
-        <div class="product-seller">
-            <i class="fas fa-user"></i>
-            <span>Posted by: {{ product.username }}</span>
-        </div>
+<div class="product-seller">
+    <i class="fas fa-user"></i>
+    <span>Posted by: 
+        <a href="https://t.me/{{ telegram_username }}" target="_blank">
+            {{ product.username }}  <!-- Display the username -->
+        </a>
+    </span>
+</div>
 
         <div class="product-location">
             <i class="fas fa-map-marker-alt"></i>

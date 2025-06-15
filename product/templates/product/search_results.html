@@ -24,16 +24,15 @@
                                 {% if product.media_path %}
     <img src="{% get_media_prefix %}{{ product.media_path }}" alt="{{ product.product_name }}" class="product-image">
 {% else %}
-    <img src="{% static 'default.jpg' %}" alt="No Image" class="product-image">
+    <img src="{% static 'default1.jpg' %}" alt="No Image" class="product-image">
 {% endif %}
-           
-            </div>
+           </div>
         {% endif %}
 
         <h3>{{ product.product_name }}</h3>
         <p class="price">
             {% if product.price %}
-                {{ product.price|floatformat:2 }} birr
+                ${{ product.price|floatformat:2 }}
             {% else %}
                 Not specified
             {% endif %}
