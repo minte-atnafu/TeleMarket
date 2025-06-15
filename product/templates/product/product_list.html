@@ -429,13 +429,13 @@
             {% endif %}
             
             <a href="{% url 'product:product_detail' product.id %}">
-                <div class="product-image-container">
-                  {% if product.media_path %}
-    <img src="{% get_media_prefix %}{{ product.media_path }}" alt="{{ product.product_name }}" class="product-image">
-{% else %}
-    <img src="{% static 'default1.jpg' %}" alt="No Image" class="product-image">
-{% endif %}
-                </div>
+       <div class="product-image-container">
+    <img src="{{ product.media_url }}" 
+         alt="{{ product.product_name }}"
+         class="product-image"
+         loading="lazy"
+         onerror="this.src='{% static 'default1.jpg' %}'">
+</div>
                 
                 <div class="product-info">
                     <h3 class="product-title">{{ product.product_name }}</h3>

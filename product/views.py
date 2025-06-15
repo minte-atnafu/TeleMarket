@@ -12,46 +12,69 @@ from django.views.decorators.csrf import csrf_protect
 from django.http import JsonResponse
 import json
 from .utils.telegram_username_mapper import get_telegram_username  # Import the mapper
+from django.core.files.storage import default_storage
+import urllib.parse
+from urllib.parse import urlparse
+
+def is_absolute_url(path):
+    """Check if the path is a full URL"""
+    try:
+        result = urlparse(path)
+        return all([result.scheme, result.netloc])
+    except:
+        return False
+
 
 def product_list(request):
     products = Product.objects.all()
-
+    
     for product in products:
-        # Use the media_path column directly from the database
-        relative_path = product.media_path
-        full_path = os.path.join(settings.MEDIA_ROOT, relative_path) if relative_path else None
-
-        if not relative_path or not os.path.exists(full_path):
-            # If media_path is missing or the file doesn't exist, set a default image
-            relative_path = "photos/default.jpg"
-
-        product.media_path = relative_path  # Ensure media_path is set correctly
-
+        if product.media_path:
+            if is_absolute_url(product.media_path):
+                # If it's already a full URL, use as-is
+                product.media_url = product.media_path
+            else:
+                # If it's a relative path, generate proper URL
+                try:
+                    product.media_url = default_storage.url(product.media_path)
+                except:
+                    # If URL generation fails, fallback to default
+                    product.media_url = settings.STATIC_URL + 'default1.jpg'
+        else:
+            # No media path at all
+            product.media_url = settings.STATIC_URL + 'default1.jpg'
+    
     context = {'products': products}
     return render(request, 'product/product_list.html', context)
 
-
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-
-    # Handle media path (existing code)
+    
+    # Enhanced media path handling
     if product.media_path:
-        relative_path = product.media_path
-        full_path = os.path.join(settings.MEDIA_ROOT, relative_path) if relative_path else None
-        
-        if not relative_path or not os.path.exists(full_path):
-            relative_path = "photos/default.jpg"
-        product.media_path = relative_path
-
-    # Get Telegram username - USING product.username
-    telegram_username = get_telegram_username(product.username)  # Key change here
-
+        if is_absolute_url(product.media_path):
+            # Use full URL as-is
+            product.media_url = product.media_path
+        else:
+            # Handle relative path
+            try:
+                product.media_url = default_storage.url(product.media_path)
+            except:
+                # Fallback if URL generation fails
+                product.media_url = settings.STATIC_URL + 'default1.jpg'
+    else:
+        # No media path available
+        product.media_url = settings.STATIC_URL + 'default1.jpg'
+    
+    # Get Telegram username
+    telegram_username = get_telegram_username(product.username)
+    
     context = {
         'product': product,
-        'MEDIA_URL': settings.MEDIA_URL,
         'average_rating': product.average_rating,
         'rating_count': product.rating_count,
         'telegram_username': telegram_username,
+        # MEDIA_URL not needed since we're using media_url property
     }
     return render(request, 'product/product_detail.html', context)
 @require_POST
