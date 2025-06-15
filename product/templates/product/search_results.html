@@ -33,7 +33,7 @@
         <h3>{{ product.product_name }}</h3>
         <p class="price">
             {% if product.price %}
-                ${{ product.price|floatformat:2 }}
+                {{ product.price|floatformat:2 }} birr
             {% else %}
                 Not specified
             {% endif %}

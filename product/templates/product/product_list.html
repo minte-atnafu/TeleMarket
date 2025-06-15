@@ -441,9 +441,9 @@
                     <h3 class="product-title">{{ product.product_name }}</h3>
                     
                     <div class="product-price">
-                        ${{ product.price|floatformat:2 }}
+                        {{ product.price|floatformat:2 }} birr
                         {% if product.original_price %}
-                        <small>${{ product.original_price|floatformat:2 }}</small>
+                        <small>{{ product.original_price|floatformat:2 }} birr</small>
                         {% endif %}
                     </div>
                     

@@ -1,43 +1,41 @@
-{% extends 'main.html' %}
-
-{% block content %}
+{# Remove extends to avoid navbar inheritance #}
+{% load static %}
+<!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        .email-container {
-            max-width: 600px;
-            margin: auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .email-container h2 {
-            color: #333;
-        }
-        .email-container p {
-            color: #555;
-            line-height: 1.5;
-        }
-        .email-signature {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to TeleMarket Ethiopia</title>
 </head>
-<body>
-    <div class="email-container">
-        <h2>Welcome, {{ user.username }}!</h2>
-        <p>Thank you for signing up. We're excited to have you on board!</p>
-        <p>Feel free to explore our platform and reach out if you have any questions.</p>
-        <p class="email-signature">Best regards,<br><strong> TeleMarket</strong></p>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; margin: 0;">
+    <!-- Email Container -->
+    <div style="max-width: 600px; margin: 20px auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <!-- Logo - Using absolute URL -->
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="http://{{ domain }}{% static 'assets/TeleMarketLogo (1).png' %}" 
+                 alt="TeleMarket Logo" 
+                 style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
+        </div>
+        
+        <!-- Header -->
+        <h2 style="color: #333; text-align: center; margin-top: 0;">Welcome, {{ user.username }}!</h2>
+        
+        <!-- Body -->
+        <p style="color: #555; line-height: 1.5; margin-bottom: 15px;">Thank you for signing up. We're excited to have you on board!</p>
+        <p style="color: #555; line-height: 1.5; margin-bottom: 25px;">Feel free to explore our platform and reach out if you have any questions.</p>
+        
+        <!-- Signature -->
+        <div style="margin-top: 30px; font-weight: bold; border-top: 1px solid #eee; padding-top: 20px;">
+            <p style="margin: 5px 0;">Best regards,</p>
+            <p style="margin: 5px 0 20px 0;"><strong>TeleMarket Ethiopia</strong></p>
+            
+            <!-- Footer -->
+            <div style="font-size: 12px; color: #777; text-align: center;">
+                <p style="margin: 5px 0;">telemarketethiopia@gmail.com</p>
+                <p style="margin: 5px 0;">+251 911 791126 / 973092466</p>
+                <p style="margin: 5px 0;">© 2025 TeleMarket Ethiopia. All rights reserved.</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>
-
-{% endblock %}

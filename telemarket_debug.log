@@ -1,0 +1,292 @@
+2025-06-15 15:19:13,129 - INFO - 
+==================================================
+2025-06-15 15:19:13,129 - INFO - STARTING TELEGRAM MARKET SCRAPER
+2025-06-15 15:19:13,129 - INFO - ==================================================
+2025-06-15 15:19:13,132 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-06-15 15:19:13,650 - DEBUG - https://huggingface.co:443 "GET /api/whoami-v2 HTTP/11" 200 777
+2025-06-15 15:19:13,667 - DEBUG - Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2025-06-15 15:19:13,671 - DEBUG - Changing event name from before-call.apigateway to before-call.api-gateway
+2025-06-15 15:19:13,672 - DEBUG - Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2025-06-15 15:19:13,675 - DEBUG - Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2025-06-15 15:19:13,675 - DEBUG - Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2025-06-15 15:19:13,676 - DEBUG - Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2025-06-15 15:19:13,677 - DEBUG - Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2025-06-15 15:19:13,682 - DEBUG - Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2025-06-15 15:19:13,683 - DEBUG - Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2025-06-15 15:19:13,683 - DEBUG - Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2025-06-15 15:19:13,684 - DEBUG - Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2025-06-15 15:19:13,691 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\endpoints.json
+2025-06-15 15:19:13,732 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\sdk-default-configuration.json
+2025-06-15 15:19:13,733 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x000001E4A14FD440>
+2025-06-15 15:19:14,253 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\s3\2006-03-01\service-2.json.gz
+2025-06-15 15:19:14,269 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\s3\2006-03-01\service-2.sdk-extras.json
+2025-06-15 15:19:14,447 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\s3\2006-03-01\endpoint-rule-set-1.json.gz
+2025-06-15 15:19:14,452 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\partitions.json
+2025-06-15 15:19:14,455 - DEBUG - Event creating-client-class.s3: calling handler <function add_generate_presigned_post at 0x000001E4A148AFC0>
+2025-06-15 15:19:14,455 - DEBUG - Event creating-client-class.s3: calling handler <function lazy_call.<locals>._handler at 0x000001E4B5E409A0>
+2025-06-15 15:19:14,505 - DEBUG - Event creating-client-class.s3: calling handler <function add_generate_presigned_url at 0x000001E4A148AD40>
+2025-06-15 15:19:14,506 - DEBUG - Looking for endpoint for s3 via: environment_service
+2025-06-15 15:19:14,507 - DEBUG - Looking for endpoint for s3 via: environment_global
+2025-06-15 15:19:14,507 - DEBUG - Looking for endpoint for s3 via: config_service
+2025-06-15 15:19:14,507 - DEBUG - Looking for endpoint for s3 via: config_global
+2025-06-15 15:19:14,507 - DEBUG - No configured endpoint found.
+2025-06-15 15:19:14,523 - DEBUG - Setting s3 timeout as (60, 60)
+2025-06-15 15:19:14,532 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\_retry.json
+2025-06-15 15:19:14,533 - DEBUG - Registering retry handlers for service: s3
+2025-06-15 15:19:14,534 - DEBUG - Registering S3 region redirector handler
+2025-06-15 15:19:14,534 - DEBUG - Registering S3Express Identity Resolver
+2025-06-15 15:19:14,536 - DEBUG - Using proactor: IocpProactor
+2025-06-15 15:19:14,538 - INFO - Initializing NER pipeline on device: cpu
+2025-06-15 15:19:14,539 - INFO - Loading tokenizer for model: habrev/telemarket-ner-model
+2025-06-15 15:19:14,808 - DEBUG - https://huggingface.co:443 "HEAD /habrev/telemarket-ner-model/resolve/main/tokenizer_config.json HTTP/11" 200 0
+2025-06-15 15:19:15,108 - DEBUG - https://huggingface.co:443 "GET /api/models/habrev/telemarket-ner-model/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/11" 404 64
+2025-06-15 15:19:16,450 - INFO - Tokenizer loaded. Vocab size: 250002
+2025-06-15 15:19:16,451 - INFO - Checking model configuration...
+2025-06-15 15:19:16,747 - DEBUG - https://huggingface.co:443 "HEAD /habrev/telemarket-ner-model/resolve/main/config.json HTTP/11" 200 0
+2025-06-15 15:19:17,641 - INFO - Model labels: {0: 'LABEL_0', 1: 'LABEL_1', 2: 'LABEL_2', 3: 'LABEL_3', 4: 'LABEL_4', 5: 'LABEL_5', 6: 'LABEL_6'}
+2025-06-15 15:19:17,642 - INFO - Number of labels: 7
+2025-06-15 15:19:17,644 - INFO - Creating NER pipeline...
+2025-06-15 15:19:17,908 - DEBUG - https://huggingface.co:443 "HEAD /habrev/telemarket-ner-model/resolve/main/config.json HTTP/11" 200 0
+2025-06-15 15:19:21,091 - DEBUG - Using proactor: IocpProactor
+2025-06-15 15:19:21,103 - INFO - 
+==================================================
+2025-06-15 15:19:21,105 - INFO - RUNNING MODEL DIAGNOSTICS
+2025-06-15 15:19:21,106 - INFO - ==================================================
+2025-06-15 15:19:21,107 - INFO - 
+Testing: 'iPhone 15 Pro for 45,000 ETB in Addis Ababa'
+2025-06-15 15:19:21,116 - DEBUG - Preprocessed text: iPhone 15 Pro for 45,000 ETB in Addis Ababa
+2025-06-15 15:19:21,117 - DEBUG - Preprocessed text: iPhone 15 Pro for 45,000 ETB in Addis Ababa
+2025-06-15 15:19:21,117 - DEBUG - Running NER on text: 'iPhone 15 Pro for 45,000 ETB in Addis Ababa'
+2025-06-15 15:19:21,152 - DEBUG - Raw model output: []
+2025-06-15 15:19:21,153 - DEBUG - Merged entities: {'Product': '', 'Price': '', 'Location': ''}
+2025-06-15 15:19:21,153 - INFO - Extracted entities: {'Product': '', 'Price': '', 'Location': ''}
+2025-06-15 15:19:21,341 - INFO - 
+Testing: 'Samsung Galaxy S24 1200 USD available in Dubai'
+2025-06-15 15:19:21,345 - DEBUG - Preprocessed text: Samsung Galaxy S24 1200 USD available in Dubai
+2025-06-15 15:19:21,348 - DEBUG - Preprocessed text: Samsung Galaxy S24 1200 USD available in Dubai
+2025-06-15 15:19:21,349 - DEBUG - Running NER on text: 'Samsung Galaxy S24 1200 USD available in Dubai'
+2025-06-15 15:19:21,356 - DEBUG - Raw model output: []
+2025-06-15 15:19:21,356 - DEBUG - Merged entities: {'Product': '', 'Price': '', 'Location': ''}
+2025-06-15 15:19:21,356 - INFO - Extracted entities: {'Product': '', 'Price': '', 'Location': ''}
+2025-06-15 15:19:21,388 - INFO - 
+Testing: 'MacBook Pro 2500'
+2025-06-15 15:19:21,389 - DEBUG - Preprocessed text: MacBook Pro 2500
+2025-06-15 15:19:21,389 - DEBUG - Preprocessed text: MacBook Pro 2500
+2025-06-15 15:19:21,389 - DEBUG - Running NER on text: 'MacBook Pro 2500'
+2025-06-15 15:19:21,403 - DEBUG - Raw model output: []
+2025-06-15 15:19:21,404 - DEBUG - Merged entities: {'Product': '', 'Price': '', 'Location': ''}
+2025-06-15 15:19:21,404 - INFO - Extracted entities: {'Product': '', 'Price': '', 'Location': ''}
+2025-06-15 15:19:21,416 - INFO - ==================================================
+
+2025-06-15 15:19:21,417 - DEBUG - Using proactor: IocpProactor
+2025-06-15 15:19:21,418 - INFO - Connecting to 149.154.167.92:443/TcpFull...
+2025-06-15 15:19:21,418 - DEBUG - Connection attempt 1...
+2025-06-15 15:19:21,570 - DEBUG - Connection success!
+2025-06-15 15:19:21,570 - DEBUG - Starting send loop
+2025-06-15 15:19:21,570 - DEBUG - Starting receive loop
+2025-06-15 15:19:21,570 - INFO - Connection to 149.154.167.92:443/TcpFull complete!
+2025-06-15 15:19:21,572 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:21,572 - DEBUG - Assigned msg_id = 7516149653112232996 to InvokeWithLayerRequest (1e4b6bd2c00)
+2025-06-15 15:19:21,572 - DEBUG - Encrypting 1 message(s) in 76 bytes for sending
+2025-06-15 15:19:21,573 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:21,573 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:21,574 - DEBUG - Receiving items from the network...
+2025-06-15 15:19:21,718 - DEBUG - Handling bad salt for message 7516149653112232996
+2025-06-15 15:19:21,718 - DEBUG - 1 message(s) will be resent
+2025-06-15 15:19:21,719 - DEBUG - Receiving items from the network...
+2025-06-15 15:19:21,719 - DEBUG - Assigned msg_id = 7516149653701185060 to InvokeWithLayerRequest (1e4b6bd2c00)
+2025-06-15 15:19:21,720 - DEBUG - Encrypting 1 message(s) in 76 bytes for sending
+2025-06-15 15:19:21,721 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:21,722 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:21,722 - DEBUG - Assigned msg_id = 7516149653713198496 to MsgsAck (1e4b6bd3b90)
+2025-06-15 15:19:21,723 - DEBUG - Encrypting 1 message(s) in 36 bytes for sending
+2025-06-15 15:19:21,725 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:21,728 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:21,847 - DEBUG - Handling container
+2025-06-15 15:19:21,848 - DEBUG - Handling new session created
+2025-06-15 15:19:21,849 - DEBUG - Handling acknowledge for [7516149653701185060]
+2025-06-15 15:19:21,849 - DEBUG - Receiving items from the network...
+2025-06-15 15:19:21,872 - DEBUG - Handling RPC result for message 7516149653701185060
+2025-06-15 15:19:21,882 - DEBUG - Receiving items from the network...
+2025-06-15 15:19:21,882 - DEBUG - Assigned msg_id = 7516149654354744744 to GetUsersRequest (1e4b6bd2c00)
+2025-06-15 15:19:21,882 - DEBUG - Encrypting 1 message(s) in 32 bytes for sending
+2025-06-15 15:19:21,884 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:21,884 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:21,885 - DEBUG - Assigned msg_id = 7516149654366822076 to MsgsAck (1e4b66d1010)
+2025-06-15 15:19:21,885 - DEBUG - Encrypting 1 message(s) in 60 bytes for sending
+2025-06-15 15:19:21,886 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:21,887 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:22,249 - DEBUG - Handling RPC result for message 7516149654354744744
+2025-06-15 15:19:22,250 - DEBUG - Receiving items from the network...
+2025-06-15 15:19:22,251 - DEBUG - Assigned msg_id = 7516149656125957920 to GetStateRequest (1e4b5dc3860)
+2025-06-15 15:19:22,252 - DEBUG - Encrypting 1 message(s) in 20 bytes for sending
+2025-06-15 15:19:22,254 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:22,254 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:22,255 - DEBUG - Assigned msg_id = 7516149656141615344 to MsgsAck (1e4b6a4e180)
+2025-06-15 15:19:22,255 - DEBUG - Encrypting 1 message(s) in 36 bytes for sending
+2025-06-15 15:19:22,257 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:22,258 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:22,505 - DEBUG - Handling RPC result for message 7516149656125957920
+2025-06-15 15:19:22,506 - DEBUG - Receiving items from the network...
+2025-06-15 15:19:22,506 - DEBUG - Assigned msg_id = 7516149657146199660 to GetDifferenceRequest (1e4b5dc3860)
+2025-06-15 15:19:22,507 - DEBUG - Encrypting 1 message(s) in 36 bytes for sending
+2025-06-15 15:19:22,508 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:22,509 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:22,510 - DEBUG - Assigned msg_id = 7516149657162240460 to MsgsAck (1e4b6bd2c00)
+2025-06-15 15:19:22,511 - DEBUG - Encrypting 1 message(s) in 36 bytes for sending
+2025-06-15 15:19:22,514 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:22,516 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:22,740 - DEBUG - Handling RPC result for message 7516149657146199660
+2025-06-15 15:19:22,741 - DEBUG - Receiving items from the network...
+2025-06-15 15:19:22,764 - DEBUG - Assigned msg_id = 7516149658176238492 to GetStateRequest (1e4b6bd2cf0)
+2025-06-15 15:19:22,764 - DEBUG - Encrypting 1 message(s) in 20 bytes for sending
+2025-06-15 15:19:22,765 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:22,765 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:22,766 - DEBUG - Assigned msg_id = 7516149658180234388 to MsgsAck (1e4b6bd2ba0)
+2025-06-15 15:19:22,766 - DEBUG - Encrypting 1 message(s) in 36 bytes for sending
+2025-06-15 15:19:22,767 - DEBUG - Encrypted messages put in a queue to be sent
+2025-06-15 15:19:22,767 - DEBUG - Waiting for messages to send...
+2025-06-15 15:19:23,073 - DEBUG - Handling RPC result for message 7516149658176238492
+2025-06-15 15:19:23,074 - DEBUG - Receiving items from the network...
+2025-06-15 15:20:20,937 - INFO - 
+Scraper stopped by user
+2025-06-15 15:20:20,938 - INFO - Event loop closed
+2025-06-15 15:20:20,938 - INFO - ==================================================
+
+2025-06-15 15:20:21,150 - ERROR - Unexpected exception in the send loop
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+GeneratorExit
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\site-packages\telethon\network\connection\connection.py", line 322, in _send_loop
+    self._send(await self._send_queue.get())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 160, in get
+    getter.cancel()  # Just in case getter is not done yet.
+    ^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 795, in call_soon
+    self._check_closed()
+  File "C:\Python312\Lib\asyncio\base_events.py", line 541, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-15 15:20:21,160 - ERROR - Task was destroyed but it is pending!
+task: <Task cancelling name='Task-5' coro=<Connection._send_loop() running at C:\Python312\Lib\site-packages\telethon\network\connection\connection.py:332> wait_for=<Future cancelled>>
+2025-06-15 15:20:21,160 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-6' coro=<Connection._recv_loop() done, defined at C:\Python312\Lib\site-packages\telethon\network\connection\connection.py:334> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+2025-06-15 15:20:21,160 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-7' coro=<MTProtoSender._send_loop() done, defined at C:\Python312\Lib\site-packages\telethon\network\mtprotosender.py:446> wait_for=<Future pending cb=[Task.task_wakeup()]>>
+2025-06-15 15:20:21,161 - ERROR - Unhandled error while receiving data
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+GeneratorExit
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\site-packages\telethon\network\mtprotosender.py", line 507, in _recv_loop
+    body = await self._connection.recv()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\site-packages\telethon\network\connection\connection.py", line 308, in recv
+    result, err = await self._recv_queue.get()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 160, in get
+    getter.cancel()  # Just in case getter is not done yet.
+    ^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 795, in call_soon
+    self._check_closed()
+  File "C:\Python312\Lib\asyncio\base_events.py", line 541, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-15 15:20:21,174 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-8' coro=<MTProtoSender._recv_loop() done, defined at C:\Python312\Lib\site-packages\telethon\network\mtprotosender.py:497> wait_for=<Future cancelled>>
+2025-06-15 15:20:21,175 - ERROR - Fatal error handling updates (this is a bug in Telethon v1.40.0, please report it)
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+GeneratorExit
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\site-packages\telethon\client\updates.py", line 452, in _update_loop
+    updates = await asyncio.wait_for(self._updates_queue.get(), deadline_delay)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 160, in get
+    getter.cancel()  # Just in case getter is not done yet.
+    ^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 795, in call_soon
+    self._check_closed()
+  File "C:\Python312\Lib\asyncio\base_events.py", line 541, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-15 15:20:21,178 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-9' coro=<UpdateMethods._update_loop() done, defined at C:\Python312\Lib\site-packages\telethon\client\updates.py:258> wait_for=<Future cancelled>>
+2025-06-15 15:20:21,179 - ERROR - Task was destroyed but it is pending!
+task: <Task pending name='Task-10' coro=<UpdateMethods._keepalive_loop() done, defined at C:\Python312\Lib\site-packages\telethon\client\updates.py:481> wait_for=<Future pending cb=[shield.<locals>._outer_done_callback() at C:\Python312\Lib\asyncio\tasks.py:922, Task.task_wakeup()]>>
+2025-06-15 15:21:39,673 - INFO - 
+==================================================
+2025-06-15 15:21:39,673 - INFO - STARTING TELEGRAM MARKET SCRAPER
+2025-06-15 15:21:39,673 - INFO - ==================================================
+2025-06-15 15:21:39,677 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-06-15 15:21:40,211 - DEBUG - https://huggingface.co:443 "GET /api/whoami-v2 HTTP/11" 200 777
+2025-06-15 15:21:40,218 - INFO - Successfully logged in to Hugging Face Hub [OK]
+2025-06-15 15:21:40,220 - DEBUG - Changing event name from creating-client-class.iot-data to creating-client-class.iot-data-plane
+2025-06-15 15:21:40,226 - DEBUG - Changing event name from before-call.apigateway to before-call.api-gateway
+2025-06-15 15:21:40,228 - DEBUG - Changing event name from request-created.machinelearning.Predict to request-created.machine-learning.Predict
+2025-06-15 15:21:40,231 - DEBUG - Changing event name from before-parameter-build.autoscaling.CreateLaunchConfiguration to before-parameter-build.auto-scaling.CreateLaunchConfiguration
+2025-06-15 15:21:40,232 - DEBUG - Changing event name from before-parameter-build.route53 to before-parameter-build.route-53
+2025-06-15 15:21:40,234 - DEBUG - Changing event name from request-created.cloudsearchdomain.Search to request-created.cloudsearch-domain.Search
+2025-06-15 15:21:40,237 - DEBUG - Changing event name from docs.*.autoscaling.CreateLaunchConfiguration.complete-section to docs.*.auto-scaling.CreateLaunchConfiguration.complete-section
+2025-06-15 15:21:40,243 - DEBUG - Changing event name from before-parameter-build.logs.CreateExportTask to before-parameter-build.cloudwatch-logs.CreateExportTask
+2025-06-15 15:21:40,248 - DEBUG - Changing event name from docs.*.logs.CreateExportTask.complete-section to docs.*.cloudwatch-logs.CreateExportTask.complete-section
+2025-06-15 15:21:40,249 - DEBUG - Changing event name from before-parameter-build.cloudsearchdomain.Search to before-parameter-build.cloudsearch-domain.Search
+2025-06-15 15:21:40,251 - DEBUG - Changing event name from docs.*.cloudsearchdomain.Search.complete-section to docs.*.cloudsearch-domain.Search.complete-section
+2025-06-15 15:21:40,262 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\endpoints.json
+2025-06-15 15:21:40,289 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\sdk-default-configuration.json
+2025-06-15 15:21:40,290 - DEBUG - Event choose-service-name: calling handler <function handle_service_name_alias at 0x0000016FA3065120>
+2025-06-15 15:21:40,383 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\s3\2006-03-01\service-2.json.gz
+2025-06-15 15:21:40,395 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\s3\2006-03-01\service-2.sdk-extras.json
+2025-06-15 15:21:40,479 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\s3\2006-03-01\endpoint-rule-set-1.json.gz
+2025-06-15 15:21:40,484 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\partitions.json
+2025-06-15 15:21:40,485 - DEBUG - Event creating-client-class.s3: calling handler <function add_generate_presigned_post at 0x0000016FA2FEECA0>
+2025-06-15 15:21:40,486 - DEBUG - Event creating-client-class.s3: calling handler <function lazy_call.<locals>._handler at 0x0000016FB797FA60>
+2025-06-15 15:21:40,521 - DEBUG - Event creating-client-class.s3: calling handler <function add_generate_presigned_url at 0x0000016FA2FEEA20>
+2025-06-15 15:21:40,522 - DEBUG - Looking for endpoint for s3 via: environment_service
+2025-06-15 15:21:40,522 - DEBUG - Looking for endpoint for s3 via: environment_global
+2025-06-15 15:21:40,523 - DEBUG - Looking for endpoint for s3 via: config_service
+2025-06-15 15:21:40,523 - DEBUG - Looking for endpoint for s3 via: config_global
+2025-06-15 15:21:40,523 - DEBUG - No configured endpoint found.
+2025-06-15 15:21:40,539 - DEBUG - Setting s3 timeout as (60, 60)
+2025-06-15 15:21:40,547 - DEBUG - Loading JSON file: C:\Users\mintesinot\AppData\Roaming\Python\Python312\site-packages\botocore\data\_retry.json
+2025-06-15 15:21:40,548 - DEBUG - Registering retry handlers for service: s3
+2025-06-15 15:21:40,548 - DEBUG - Registering S3 region redirector handler
+2025-06-15 15:21:40,549 - DEBUG - Registering S3Express Identity Resolver
+2025-06-15 15:21:40,550 - DEBUG - Using proactor: IocpProactor
+2025-06-15 15:21:40,552 - INFO - Initializing NER pipeline on device: cpu
+2025-06-15 15:21:40,552 - INFO - Loading tokenizer for model: habrev/telemarket-ner-model
+2025-06-15 15:21:40,768 - DEBUG - https://huggingface.co:443 "HEAD /habrev/telemarket-ner-model/resolve/main/tokenizer_config.json HTTP/11" 200 0
+2025-06-15 15:21:41,049 - DEBUG - https://huggingface.co:443 "GET /api/models/habrev/telemarket-ner-model/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/11" 404 64
+2025-06-15 15:21:42,129 - INFO - Tokenizer loaded. Vocab size: 250002
+2025-06-15 15:21:42,129 - INFO - Checking model configuration...
+2025-06-15 15:21:42,350 - DEBUG - https://huggingface.co:443 "HEAD /habrev/telemarket-ner-model/resolve/main/config.json HTTP/11" 200 0
+2025-06-15 15:21:42,883 - INFO - Model labels: {0: 'LABEL_0', 1: 'LABEL_1', 2: 'LABEL_2', 3: 'LABEL_3', 4: 'LABEL_4', 5: 'LABEL_5', 6: 'LABEL_6'}
+2025-06-15 15:21:42,884 - INFO - Number of labels: 7
+2025-06-15 15:21:42,884 - INFO - Creating NER pipeline...
+2025-06-15 15:21:43,103 - DEBUG - https://huggingface.co:443 "HEAD /habrev/telemarket-ner-model/resolve/main/config.json HTTP/11" 200 0
+2025-06-15 15:21:43,233 - INFO - NER pipeline successfully initialized [OK]
+2025-06-15 15:21:45,605 - INFO - Connected to Neon DB at: ep-bitter-sound-a435buge-pooler.us-east-1.aws.neon.tech [OK]
+2025-06-15 15:21:45,638 - DEBUG - Using proactor: IocpProactor
+2025-06-15 15:21:45,698 - INFO - 
+==================================================
+2025-06-15 15:21:45,698 - INFO - RUNNING MODEL DIAGNOSTICS
+2025-06-15 15:21:45,699 - INFO - ==================================================
+2025-06-15 15:21:45,700 - INFO - 
+Testing: 'iPhone 15 Pro for 45,000 ETB in Addis Ababa'

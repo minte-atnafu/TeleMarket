@@ -36,12 +36,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Application definition
-
+AWS_S3_FILE_OVERWRITE = False
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
 
 # these for AWS sotarge configuration
 import os
 
-# AWS S3 settings
+
 # AWS S3 settings using environment variables
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
@@ -64,6 +67,7 @@ INSTALLED_APPS = [
     'users',
     'product',
     'base',
+    'TeleMarket',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

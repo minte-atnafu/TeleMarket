@@ -233,7 +233,7 @@
         {% csrf_token %}
     </form>
         <h1 class="product-title">{{ product.product_name }}</h1>
-        <div class="product-price">${{ product.price }}</div>
+        <div class="product-price">{{ product.price }} birr</div>
 
         <div class="product-seller">
             <i class="fas fa-user"></i>
