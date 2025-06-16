@@ -229,3 +229,8 @@ CACHES = {
 }
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'https://telemarket-4e8i.onrender.com/accounts/google/login/callback/'
 
+# settings.py
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # For Render/Heroku
+SECURE_SSL_REDIRECT = True  # Redirect HTTP → HTTPS
+SESSION_COOKIE_SECURE = True  
+CSRF_COOKIE_SECURE = True  
