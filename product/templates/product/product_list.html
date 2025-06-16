@@ -429,12 +429,12 @@
             {% endif %}
             
             <a href="{% url 'product:product_detail' product.id %}">
-       <div class="product-image-container">
+      <div class="product-image-container">
     <img src="{{ product.media_url }}" 
          alt="{{ product.product_name }}"
          class="product-image"
          loading="lazy"
-         onerror="this.src='{% static 'default1.jpg' %}'">
+         onerror="this.onerror=null;this.src='{% static 'default1.jpg' %}'">
 </div>
                 
                 <div class="product-info">

@@ -29,19 +29,21 @@ def product_list(request):
     products = Product.objects.all()
     
     for product in products:
+        # Handle media paths (both full URLs and relative paths)
         if product.media_path:
             if is_absolute_url(product.media_path):
-                # If it's already a full URL, use as-is
+                # Case 1: Full URL (https://telemarket.s3.amazonaws.com/...)
                 product.media_url = product.media_path
             else:
-                # If it's a relative path, generate proper URL
+                # Case 2: Relative path (photos/@phonehub27_10105.jpg)
                 try:
+                    # Generate proper S3 URL from relative path
                     product.media_url = default_storage.url(product.media_path)
                 except:
-                    # If URL generation fails, fallback to default
+                    # Fallback if URL generation fails
                     product.media_url = settings.STATIC_URL + 'default1.jpg'
         else:
-            # No media path at all
+            # No media path available
             product.media_url = settings.STATIC_URL + 'default1.jpg'
     
     context = {'products': products}
@@ -50,14 +52,15 @@ def product_list(request):
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     
-    # Enhanced media path handling
+    # Handle both URL formats
     if product.media_path:
         if is_absolute_url(product.media_path):
-            # Use full URL as-is
+            # Case 1: Already a full S3 URL (https://telemarket.s3.amazonaws.com/...)
             product.media_url = product.media_path
         else:
-            # Handle relative path
+            # Case 2: Relative path (photos/@phonehub27_10105.jpg)
             try:
+                # Generate proper S3 URL from relative path
                 product.media_url = default_storage.url(product.media_path)
             except:
                 # Fallback if URL generation fails
@@ -74,7 +77,6 @@ def product_detail(request, product_id):
         'average_rating': product.average_rating,
         'rating_count': product.rating_count,
         'telegram_username': telegram_username,
-        # MEDIA_URL not needed since we're using media_url property
     }
     return render(request, 'product/product_detail.html', context)
 @require_POST
