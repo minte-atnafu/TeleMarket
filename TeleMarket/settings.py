@@ -84,19 +84,16 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',  # Add the provider(s) you need
 ]
 
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "SCOPE": ["profile", "email"],
-        "AUTH_PARAMS": {"access_type": "online"},
-        "APP": {
-            "client_id": config("GOOGLE_CLIENT_ID"),  # Ensure these are set in .env
-            "secret": config("GOOGLE_CLIENT_SECRET"),
-            "key": "",
-        },
-        # Add this to explicitly set the callback URL
-        "CALLBACK_URL": "https://telemarket-4e8i.onrender.com/accounts/google/login/callback/",
+SOCIALACCOUNT_PROVIDERS ={
+    "google":{
+        "scope":[
+            "profile",
+            "email"
+        ],
+        "AUTH_PARAMS": {"access_type": "online"}
     }
 }
+
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
