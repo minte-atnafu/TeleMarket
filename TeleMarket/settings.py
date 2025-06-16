@@ -227,4 +227,5 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = 'https://telemarket-4e8i.onrender.com/accounts/google/login/callback/'
 
